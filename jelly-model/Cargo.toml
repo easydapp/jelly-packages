@@ -1,0 +1,55 @@
+[package]
+name = "jelly-model"
+version = "0.0.1"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+lto = true        # Used to enable link time optimization
+opt-level = 'z'   # Optimization Level
+codegen-units = 1 # Use the highest level of optimization throughout the entire Crate
+strip = true      # Dipping the debugging information and reduce the output size
+
+[lints.rust]
+unsafe_code = "forbid"
+unreachable_pub = "deny"
+missing_docs = "warn"
+
+[lints.rustdoc]
+broken_intra_doc_links = "warn"
+
+[lints.clippy]
+future_not_send = "warn"
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+# [lib]
+# crate-type = ["cdylib"]
+
+[features]
+default = []
+
+validate = ["jelly-executor"]
+
+wasm_bindgen = ["wasm-bindgen"]
+
+[dependencies]
+serde = { version = "1.0.215", features = ["derive"] }
+serde_json = "1.0.133"                                 # json
+
+ic-stable-structures = "0.6.7"
+ciborium = "0.2"
+
+regex = "1.11"
+candid = "0.10.13"
+bs58 = "0.5"
+hex = "0.4"
+lazy_static = "1.5"
+sha2 = "0.10"
+
+wasm-bindgen = { version = "0.2.100", optional = true }
+
+ic-canister-kit = { version = "1.0.17", features = ["canister-did"] }
+jelly-executor = { path = "../jelly-executor", optional = true }
