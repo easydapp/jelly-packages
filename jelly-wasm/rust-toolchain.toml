@@ -1,0 +1,7 @@
+[toolchain]
+channel = "1.85.0" # A name release channel or a clear version number。 For example: stable|beta|nightly|<version>
+# targets = ["wasm32-unknown-unknown"] # Compiled target environment
+components = [
+    "rustfmt", # Formulate code
+    "clippy",  # Code optimization
+]

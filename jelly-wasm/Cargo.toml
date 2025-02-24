@@ -1,0 +1,44 @@
+[package]
+name = "wasm"
+version = "0.0.1"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+lto = true        # Used to enable link time optimization
+opt-level = 'z'   # Optimization Level
+codegen-units = 1 # Use the highest level of optimization throughout the entire Crate
+strip = true      # Dipping the debugging information and reduce the output size
+
+[lints.rust]
+unsafe_code = "forbid"
+unreachable_pub = "deny"
+missing_docs = "warn"
+
+[lints.rustdoc]
+broken_intra_doc_links = "warn"
+
+[lints.clippy]
+future_not_send = "warn"
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = true
+
+[dependencies]
+jelly-executor = { path = "../jelly-executor" }
+jelly-model = { path = "../jelly-model", features = ["validate"] }
+wasm-bindgen = "0.2.100"
+getrandom = { version = "0.2.15", features = ["js"] } # can not upgrade to 0.3
+serde = { version = "1.0.218", features = ["derive"] }
+serde_json = "1.0.139"
+ic-canister-kit = { version = "1.0.17", features = ["canister-did"] }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.50"
