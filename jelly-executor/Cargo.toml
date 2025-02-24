@@ -1,0 +1,31 @@
+[package]
+name = "jelly-executor"
+version = "0.0.1"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+lto = true        # Used to enable link time optimization
+opt-level = 'z'   # Optimization Level
+codegen-units = 1 # Use the highest level of optimization throughout the entire Crate
+strip = true      # Dipping the debugging information and reduce the output size
+
+[lints.rust]
+unsafe_code = "deny"
+unreachable_pub = "deny"
+missing_docs = "warn"
+
+[lints.rustdoc]
+broken_intra_doc_links = "warn"
+
+[lints.clippy]
+future_not_send = "warn"
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+[dependencies]
+boa_engine = "0.20"
+serde = "1.0.218"
+serde_json = "1.0.139"
