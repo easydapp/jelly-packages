@@ -4,6 +4,7 @@
 import { Principal } from '@dfinity/principal';
 import { getCrc32 } from '@dfinity/principal/lib/cjs/utils/getCrc';
 import { sha224 } from '@dfinity/principal/lib/cjs/utils/sha224';
+
 import { array2hex } from './open-hex';
 
 function str2UTF8(str: string): number[] {
