@@ -9,7 +9,7 @@ export default {
     singleQuote: true,
     trailingComma: 'all',
     bracketSpacing: true,
-    bracketSameLine: true,
+    bracketSameLine: false,
     vueIndentScriptAndStyle: false,
     proseWrap: 'always',
     htmlWhitespaceSensitivity: 'strict',
@@ -18,9 +18,12 @@ export default {
     quoteProps: 'as-needed',
     plugins: ["@ianvs/prettier-plugin-sort-imports"],
     importOrder: [
-        "<BUILTIN_MODULES>", // Node.js built-in modules
-        "<THIRD_PARTY_MODULES>", // Imports not matched by other special words or groups.
-        "", // Empty line
-        "^[./]"
-    ]
-}
+        '<BUILTIN_MODULES>', // Node.js built-in modules
+        '<THIRD_PARTY_MODULES>', // Imports not matched by other special words or groups.
+        '', // Empty line
+        '^[./]',
+    ],
+    importOrderGroupNamespaceSpecifiers: true,
+    importOrderSortSpecifiers: true,
+    importOrderCaseInsensitive: true,
+};

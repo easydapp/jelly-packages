@@ -9,7 +9,7 @@ export default {
     singleQuote: true,
     trailingComma: 'all',
     bracketSpacing: true,
-    bracketSameLine: true,
+    bracketSameLine: false,
     vueIndentScriptAndStyle: false,
     proseWrap: 'always',
     htmlWhitespaceSensitivity: 'strict',
@@ -23,4 +23,7 @@ export default {
         '', // Empty line
         '^[./]',
     ],
+    importOrderGroupNamespaceSpecifiers: true,
+    importOrderSortSpecifiers: true,
+    importOrderCaseInsensitive: true,
 };
