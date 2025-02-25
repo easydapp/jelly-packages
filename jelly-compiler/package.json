@@ -24,7 +24,7 @@
         "postversion": "git push && git push --tags"
     },
     "dependencies": {
-        "@jellypack/types": "0.0.2",
+        "@jellypack/types": "^0.0.2",
         "esbuild-wasm": "^0.25.0",
         "eslint-linter-browserify": "^9.21.0",
         "lodash": "^4.17.21"
