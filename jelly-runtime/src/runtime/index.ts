@@ -434,7 +434,7 @@ export class CombinedRuntime {
                     // ! waiting for trigger if needs
                     if (
                         component_identity_has_value(identity, this.identity) || // Value can trigger
-                        trigger === id || // User click can trigger
+                        (trigger === id && !identity_triggered[id]) || // User click can trigger
                         (trigger && info.identity_triggers?.has(trigger)) || // The only dependencies can trigger
                         (!component_identity_get_connect(identity) && // No need to click on, and it is currently triggered by follow -up, and has not tried this round
                             this.identity_triggered(id, trigger) &&
