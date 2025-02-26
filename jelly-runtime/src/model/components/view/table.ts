@@ -12,7 +12,6 @@ export const view_table_metadata_get_used_component = (self: ViewTableMetadata):
 
 // ========================= style =========================
 
- 
 export interface ViewTableMetadataStyle {
     style?: {
         fontSize?: string;

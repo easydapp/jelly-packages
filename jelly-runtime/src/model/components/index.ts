@@ -1,13 +1,10 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { match_component_call_trigger } from '../common/call_trigger';
 import { ComponentId } from '../common/identity';
 import { AllBranch, AllBranches, AllEndpoints, Endpoint } from '../common/lets';
 import { ValidateForm } from '../common/validate';
-import {
-    component_call_get_trigger,
-    component_call_get_used_component,
-    ComponentCall,
-} from './call';
+import { component_call_get_trigger, component_call_get_used_component, ComponentCall } from './call';
 import { component_code_get_used_component, ComponentCode } from './code';
 import {
     component_combined_get_output_type,

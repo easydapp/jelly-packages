@@ -19,10 +19,7 @@ import {
     NamedValue,
 } from '../../../common/refer';
 import { ComponentIdentityValue } from '../../identity';
-import {
-    identity_http_metadata_get_anonymous_value,
-    IdentityHttpOutput,
-} from '../../identity/http';
+import { identity_http_metadata_get_anonymous_value, IdentityHttpOutput } from '../../identity/http';
 import { get_http_body_value, http_body_get_used_component, HttpBody } from './body';
 import { get_http_headers_value } from './headers';
 import { HttpMethod } from './method';

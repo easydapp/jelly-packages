@@ -1,10 +1,7 @@
 import { LinkComponent } from '../model';
 import { ComponentId } from '../model/common/identity';
 import { AllBranches, AllEndpoints } from '../model/common/lets';
-import {
-    link_component_get_used_component,
-    link_component_is_triggered,
-} from '../model/components';
+import { link_component_get_used_component, link_component_is_triggered } from '../model/components';
 import { match_identity_inner_metadata } from '../model/components/identity';
 
 export class ComponentInfo {
@@ -45,8 +42,7 @@ export class ComponentInfo {
                     else no_triggers.add(b.id);
                     // Indirect reference is not checked
                 }
-                this.identity_triggers =
-                    no_triggers.size || triggers.size !== 1 ? undefined : triggers;
+                this.identity_triggers = no_triggers.size || triggers.size !== 1 ? undefined : triggers;
             }
         }
     }

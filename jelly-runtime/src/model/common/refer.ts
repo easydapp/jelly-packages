@@ -1,5 +1,6 @@
 import { LinkType } from '@jellypack/types/lib/types';
 import { LinkValue } from '@jellypack/types/lib/values';
+
 import { ComponentId } from './identity';
 import { Endpoint } from './lets';
 
@@ -37,17 +38,17 @@ export const match_input_value = <T>(
 };
 export const match_input_value_async = async <T>(
     self: InputValue,
-    {
-        constant,
-        refer,
-    }: { constant: (constant: LinkValue) => Promise<T>; refer: (refer: ReferValue) => Promise<T> },
+    { constant, refer }: { constant: (constant: LinkValue) => Promise<T>; refer: (refer: ReferValue) => Promise<T> },
 ): Promise<T> => {
     if ('const' in self) return constant(self.const);
     if ('refer' in self) return refer(self.refer);
     throw new Error('Invalid InputValue');
 };
 
-export interface ReferValue { endpoint: Endpoint; refer?: KeyRefer }
+export interface ReferValue {
+    endpoint: Endpoint;
+    refer?: KeyRefer;
+}
 
 export const refer_value_get_type = (self: ReferValue, ty: LinkType): LinkType => {
     if (self.refer === undefined) return ty;
@@ -59,7 +60,10 @@ export const refer_value_get_value = (self: ReferValue, value: any): any => {
     return key_refer_get_value(self.refer, value);
 };
 
-export interface KeyRefer { key: string; refer?: KeyRefer }
+export interface KeyRefer {
+    key: string;
+    refer?: KeyRefer;
+}
 
 export const key_refer_get_output_type = (self: KeyRefer, ty: LinkType): LinkType => {
     if (typeof ty === 'object' && 'object' in ty) {

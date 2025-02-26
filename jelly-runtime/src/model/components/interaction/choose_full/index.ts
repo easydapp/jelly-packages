@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../../../common/identity';
 import { input_value_get_used_component, InputValue } from '../../../common/refer';
 import { ChooseFullForm } from './form';
@@ -10,9 +11,7 @@ export interface InteractionChooseFullMetadata {
 }
 
 // get output type
-export const interaction_choose_full_metadata_get_output_type = (
-    _self: InteractionChooseFullMetadata,
-): LinkType => {
+export const interaction_choose_full_metadata_get_output_type = (_self: InteractionChooseFullMetadata): LinkType => {
     return 'text';
 };
 

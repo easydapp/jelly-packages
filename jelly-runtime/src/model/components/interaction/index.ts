@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../../common/identity';
 import { Endpoint } from '../../common/lets';
 import { ValidateForm } from '../../common/validate';
@@ -70,22 +71,16 @@ export const component_interaction_get_output_type = (self: ComponentInteraction
     });
 };
 
-export const component_interaction_get_used_component = (
-    self: ComponentInteraction,
-): ComponentId[] => {
+export const component_interaction_get_used_component = (self: ComponentInteraction): ComponentId[] => {
     return match_interaction_inner_metadata(self.metadata.metadata, {
         choose: (choose) => interaction_choose_metadata_get_used_component(choose),
-        choose_form: (choose_form) =>
-            interaction_choose_form_metadata_get_used_component(choose_form),
+        choose_form: (choose_form) => interaction_choose_form_metadata_get_used_component(choose_form),
         choose_tip: (choose_tip) => interaction_choose_tip_metadata_get_used_component(choose_tip),
-        choose_full: (choose_full) =>
-            interaction_choose_full_metadata_get_used_component(choose_full),
+        choose_full: (choose_full) => interaction_choose_full_metadata_get_used_component(choose_full),
     });
 };
 
-export const component_interaction_get_validate_form = (
-    self: ComponentInteraction,
-): ValidateForm | undefined => {
+export const component_interaction_get_validate_form = (self: ComponentInteraction): ValidateForm | undefined => {
     return match_interaction_inner_metadata(self.metadata.metadata, {
         choose: () => undefined,
         choose_form: (choose_form) => choose_form.validate,

@@ -1,7 +1,4 @@
-import {
-    InternetComputerApi,
-    match_internet_computer_api_async,
-} from '../../../../../../store/api/content/ic';
+import { InternetComputerApi, match_internet_computer_api_async } from '../../../../../../store/api/content/ic';
 import { WrappedCandidTypeFunction } from '../../../../../../wasm/candid';
 import { parse_func_candid_by_remote, parse_service_candid_by_remote } from './candid_by_remote';
 

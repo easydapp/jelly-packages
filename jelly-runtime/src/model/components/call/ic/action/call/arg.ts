@@ -26,10 +26,7 @@ export interface IcCallArg {
     code: IcCallArgCode;
 }
 
-export const match_ic_call_arg = <T>(
-    self: IcCallArg,
-    { code }: { code: (code: IcCallArgCode) => T },
-): T => {
+export const match_ic_call_arg = <T>(self: IcCallArg, { code }: { code: (code: IcCallArgCode) => T }): T => {
     if ('code' in self) return code(self.code);
     throw new Error('invalid ic call arg');
 };

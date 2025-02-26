@@ -8,12 +8,7 @@ import { AllEndpoints } from '../../../../common/lets';
 import { input_value_get_used_component, InputValue } from '../../../../common/refer';
 import { evm_value_exp } from '../../../../types/abi/types';
 import { ComponentIdentityEvmValue } from '../../../identity/evm';
-import {
-    call_evm_call_action,
-    evm_action_call_get_used_component,
-    EvmActionCall,
-    ExecuteEvmActionCall,
-} from './call';
+import { call_evm_call_action, evm_action_call_get_used_component, EvmActionCall, ExecuteEvmActionCall } from './call';
 import {
     call_evm_deploy_action,
     evm_action_deploy_get_used_component,
@@ -95,8 +90,7 @@ export const evm_action_get_used_component = (self: EvmAction): ComponentId[] =>
     match_evm_action(self, {
         call: (call) => used.push(...evm_action_call_get_used_component(call)),
         sign: (sign) => used.push(...input_value_get_used_component(sign)),
-        transaction: (transaction) =>
-            used.push(...evm_action_transaction_get_used_component(transaction)),
+        transaction: (transaction) => used.push(...evm_action_transaction_get_used_component(transaction)),
         deploy: (deploy) => used.push(...evm_action_deploy_get_used_component(deploy)),
         transfer: (transfer) => used.push(...evm_action_transfer_get_used_component(transfer)),
     });
@@ -135,8 +129,7 @@ export const call_evm_action = async (
                 code_executor,
                 execute_evm_action_call,
             ),
-        sign: async (sign) =>
-            await call_evm_sign_action(sign, runtime_values, calling, identity_metadata),
+        sign: async (sign) => await call_evm_sign_action(sign, runtime_values, calling, identity_metadata),
         transaction: async (transaction) =>
             await call_evm_transaction_action(
                 transaction,

@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../../common/identity';
 import { named_value_get_used_component, NamedValue } from '../../common/refer';
 import { ValidateForm } from '../../common/validate';
@@ -12,9 +13,7 @@ export interface InteractionChooseFormMetadata {
 }
 
 // get output type
-export const interaction_choose_form_metadata_get_output_type = (
-    _self: InteractionChooseFormMetadata,
-): LinkType => {
+export const interaction_choose_form_metadata_get_output_type = (_self: InteractionChooseFormMetadata): LinkType => {
     return 'text';
 };
 

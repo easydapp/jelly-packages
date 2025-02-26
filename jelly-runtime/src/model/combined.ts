@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ApiDataAnchor } from '../store/api';
 import { CodeDataAnchor } from '../store/code';
 import { CombinedAnchor } from '../store/combined';

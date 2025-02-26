@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { same } from '../../../../common/same';
 import { ViewTableMetadataStyle } from '../table';
 
@@ -9,10 +10,7 @@ export interface InnerViewTableMetadata {
 }
 
 export interface TableViewSupportedType {
-    object: [
-        { key: 'headers'; ty: { array: 'text' } },
-        { key: 'rows'; ty: { array: { array: 'text' } } },
-    ];
+    object: [{ key: 'headers'; ty: { array: 'text' } }, { key: 'rows'; ty: { array: { array: 'text' } } }];
 }
 
 export const table_view_supported_types = (): LinkType[] => {

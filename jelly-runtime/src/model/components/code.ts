@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { deepClone } from '../../common/clones';
 import { RuntimeValues } from '../../runtime/value';
 import { CodeData, CodeDataAnchor } from '../../store/code';
@@ -28,9 +29,7 @@ export interface CodeMetadata {
 }
 
 export const component_code_get_used_component = (self: ComponentCode): ComponentId[] => {
-    return (self.metadata.data ?? []).flatMap((code_value) =>
-        code_value_get_used_component(code_value),
-    );
+    return (self.metadata.data ?? []).flatMap((code_value) => code_value_get_used_component(code_value));
 };
 
 export const get_code_value = async (
@@ -46,12 +45,7 @@ export const get_code_value = async (
     // 2. execute
     let value = undefined;
     try {
-        value = await doFunctionTransformByCodeContent(
-            self.metadata.code,
-            codes,
-            [['data', data]],
-            code_executor,
-        );
+        value = await doFunctionTransformByCodeContent(self.metadata.code, codes, [['data', data]], code_executor);
     } catch (e) {
         console.error('execute code failed', e);
     }

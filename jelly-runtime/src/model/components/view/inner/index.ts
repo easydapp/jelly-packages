@@ -1,5 +1,6 @@
 import { LinkType } from '@jellypack/types/lib/types';
 import _ from 'lodash';
+
 import { array_view_is_supported_type, InnerViewArrayMetadata } from './array';
 import { bool_view_is_supported_type, InnerViewBoolMetadata } from './bool';
 import { html_view_is_supported_type, InnerViewHtmlMetadata } from './html';
@@ -49,10 +50,7 @@ export const match_inner_view_metadata = <T>(
     throw new Error('invalid inner view metadata');
 };
 
-export const inner_view_metadata_is_supported_type = (
-    self: InnerViewMetadata,
-    ty: LinkType,
-): boolean => {
+export const inner_view_metadata_is_supported_type = (self: InnerViewMetadata, ty: LinkType): boolean => {
     return match_inner_view_metadata(self, {
         text: (_) => text_view_is_supported_type(ty),
         bool: (_) => bool_view_is_supported_type(ty),

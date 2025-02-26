@@ -1,5 +1,6 @@
 import { CodeItem, CodeType } from '@jellypack/types/lib/code';
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { CodeContent } from './code';
 import { link_type_to_typescript } from './to_typescript';
 
@@ -7,10 +8,7 @@ export interface ValidateForm {
     code: CodeContent;
 }
 
-export const match_validate_form = <T>(
-    self: ValidateForm,
-    { code }: { code: (code: CodeContent) => T },
-): T => {
+export const match_validate_form = <T>(self: ValidateForm, { code }: { code: (code: CodeContent) => T }): T => {
     if ('code' in self) return code(self.code);
     throw new Error('invalid validate form');
 };

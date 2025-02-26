@@ -1,4 +1,5 @@
 import { CodeItem, LinkType, LinkValue } from '@jellypack/types';
+
 import { ComponentId } from '../model/common/identity';
 import { Endpoint } from '../model/common/lets';
 import { KeyRefer } from '../model/common/refer';

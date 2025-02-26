@@ -1,4 +1,5 @@
 import { MotokoResult } from '@choptop/haw';
+
 import { deepClone } from '../../../../../../common/clones';
 import { sha256 } from '../../../../../../common/hash';
 import { WrappedCandidTypeFunction, WrappedCandidTypeService } from '../../../../../../wasm/candid';

@@ -14,10 +14,7 @@ export const match_evm_call_api = <T>(
 
 export const match_evm_call_api_async = async <T>(
     self: EvmCallApi,
-    {
-        api,
-        anchor,
-    }: { api: (api: EvmApi) => Promise<T>; anchor: (anchor: ApiDataAnchor) => Promise<T> },
+    { api, anchor }: { api: (api: EvmApi) => Promise<T>; anchor: (anchor: ApiDataAnchor) => Promise<T> },
 ): Promise<T> => {
     if ('api' in self) return api(self.api);
     if ('anchor' in self) return anchor(self.anchor);

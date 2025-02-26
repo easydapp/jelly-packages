@@ -1,6 +1,7 @@
 import { unwrapOptionMap, unwrapRustResultMap, wrapOptionMap } from '@choptop/haw';
 import { Principal } from '@dfinity/principal';
 import bs58 from 'bs58';
+
 import { sha256 } from '../../common/hash';
 import { array2hex } from '../../common/hex';
 import { ApiData, ApiDataAnchor } from '../../store/api';
@@ -26,10 +27,7 @@ const proxy_query = async <T>(api: string): Promise<T | undefined> => {
 
 // ================= publisher =================
 
-const publisher_query = async (
-    canister_id: string,
-    anchor: PublisherAnchor,
-): Promise<Publisher | undefined> => {
+const publisher_query = async (canister_id: string, anchor: PublisherAnchor): Promise<Publisher | undefined> => {
     const { creator } = anonymous;
     const actor: _SERVICE = await creator(idlFactory, canister_id);
     const r = await actor.publisher_query(anchor);
@@ -42,9 +40,7 @@ export const query_publisher = async (anchor: PublisherAnchor): Promise<Publishe
     return publisher_query(canister_id, anchor);
 };
 
-export const proxy_query_publisher = async (
-    anchor: PublisherAnchor,
-): Promise<Publisher | undefined> => {
+export const proxy_query_publisher = async (anchor: PublisherAnchor): Promise<Publisher | undefined> => {
     return (
         (await proxy_query<Publisher>(`/storage/publisher/${encodeURIComponent(anchor)}`)) ??
         (await query_publisher(anchor))
@@ -53,10 +49,7 @@ export const proxy_query_publisher = async (
 
 // ================= code =================
 
-const code_query = async (
-    canister_id: string,
-    anchor: CodeDataAnchor,
-): Promise<CodeData | undefined> => {
+const code_query = async (canister_id: string, anchor: CodeDataAnchor): Promise<CodeData | undefined> => {
     const { creator } = anonymous;
     const actor: _SERVICE = await creator(idlFactory, canister_id);
     const r = await actor.code_query(anchor);
@@ -70,18 +63,12 @@ export const query_code = async (anchor: CodeDataAnchor): Promise<CodeData | und
 };
 
 export const proxy_query_code = async (anchor: CodeDataAnchor): Promise<CodeData | undefined> => {
-    return (
-        (await proxy_query<CodeData>(`/storage/code/${encodeURIComponent(anchor)}`)) ??
-        (await query_code(anchor))
-    );
+    return (await proxy_query<CodeData>(`/storage/code/${encodeURIComponent(anchor)}`)) ?? (await query_code(anchor));
 };
 
 // ================= apis =================
 
-const api_query = async (
-    canister_id: string,
-    anchor: ApiDataAnchor,
-): Promise<ApiData | undefined> => {
+const api_query = async (canister_id: string, anchor: ApiDataAnchor): Promise<ApiData | undefined> => {
     const { creator } = anonymous;
     const actor: _SERVICE = await creator(idlFactory, canister_id);
     const r = await actor.api_query(anchor);
@@ -95,18 +82,12 @@ export const query_api = async (anchor: ApiDataAnchor): Promise<ApiData | undefi
 };
 
 export const proxy_query_api = async (anchor: ApiDataAnchor): Promise<ApiData | undefined> => {
-    return (
-        (await proxy_query<ApiData>(`/storage/api/${encodeURIComponent(anchor)}`)) ??
-        (await query_api(anchor))
-    );
+    return (await proxy_query<ApiData>(`/storage/api/${encodeURIComponent(anchor)}`)) ?? (await query_api(anchor));
 };
 
 // ================= combined =================
 
-const combined_increment_called = async (
-    canister_id: string,
-    anchor: CombinedAnchor,
-): Promise<void> => {
+const combined_increment_called = async (canister_id: string, anchor: CombinedAnchor): Promise<void> => {
     const { creator } = anonymous;
     const actor: _SERVICE = await creator(idlFactory, canister_id);
     await actor.combined_increment_called(anchor);
@@ -118,10 +99,7 @@ export const increment_combined_called = async (anchor: CombinedAnchor): Promise
     return combined_increment_called(canister_id, anchor);
 };
 
-const combined_query = async (
-    canister_id: string,
-    anchor: CombinedAnchor,
-): Promise<Combined | undefined> => {
+const combined_query = async (canister_id: string, anchor: CombinedAnchor): Promise<Combined | undefined> => {
     const { creator } = anonymous;
     const actor: _SERVICE = await creator(idlFactory, canister_id);
     const r = await actor.combined_query(anchor);
@@ -134,9 +112,7 @@ export const query_combined = async (anchor: CombinedAnchor): Promise<Combined |
     return combined_query(canister_id, anchor);
 };
 
-export const proxy_query_combined = async (
-    anchor: CombinedAnchor,
-): Promise<Combined | undefined> => {
+export const proxy_query_combined = async (anchor: CombinedAnchor): Promise<Combined | undefined> => {
     return (
         (await proxy_query<Combined>(`/storage/combined/${encodeURIComponent(anchor)}`)) ??
         (await query_combined(anchor))
@@ -144,9 +120,7 @@ export const proxy_query_combined = async (
 };
 
 // ================= dapp =================
-export const get_dapp_canister_id_by_anchor = async (
-    anchor: DappAnchor,
-): Promise<string | undefined> => {
+export const get_dapp_canister_id_by_anchor = async (anchor: DappAnchor): Promise<string | undefined> => {
     try {
         return await parse_dapp_canister_id(anchor);
         // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-empty
@@ -205,10 +179,7 @@ const dapp_increment_called_by_token = async (
     await actor.dapp_increment_called_by_token(anchor, wrapOptionMap(verified, JSON.stringify));
 };
 
-export const increment_dapp_called_by_token = async (
-    id: string,
-    verified?: DappVerified,
-): Promise<void> => {
+export const increment_dapp_called_by_token = async (id: string, verified?: DappVerified): Promise<void> => {
     try {
         return handle_wrong_canister_id_error(id, (canister_id) =>
             dapp_increment_called_by_token(canister_id, id, verified),
@@ -239,19 +210,11 @@ const dapp_query_by_token = async (
     );
 };
 
-export const query_dapp_by_token = async (
-    id: string,
-    verified?: DappVerified,
-): Promise<DappView | undefined> => {
-    return handle_wrong_canister_id_error(id, (canister_id) =>
-        dapp_query_by_token(canister_id, id, verified),
-    );
+export const query_dapp_by_token = async (id: string, verified?: DappVerified): Promise<DappView | undefined> => {
+    return handle_wrong_canister_id_error(id, (canister_id) => dapp_query_by_token(canister_id, id, verified));
 };
 
-export const proxy_query_dapp_by_token = async (
-    id: string,
-    verified?: DappVerified,
-): Promise<DappView | undefined> => {
+export const proxy_query_dapp_by_token = async (id: string, verified?: DappVerified): Promise<DappView | undefined> => {
     if (!verified) return query_dapp_by_token(id, verified);
     return (
         (await proxy_query<DappView>(`/storage/dapp/${encodeURIComponent(id)}`)) ??
@@ -261,10 +224,7 @@ export const proxy_query_dapp_by_token = async (
 
 // ================= dapp access =================
 
-const dapp_query_access = async (
-    canister_id: string,
-    anchor: DappAnchor,
-): Promise<DappAccessView | undefined> => {
+const dapp_query_access = async (canister_id: string, anchor: DappAnchor): Promise<DappAccessView | undefined> => {
     const { creator } = anonymous;
     const actor: _SERVICE = await creator(idlFactory, canister_id);
     const r = await actor.dapp_query_access(anchor);
@@ -285,9 +245,7 @@ export const query_dapp_access_by_id = async (id: string): Promise<DappAccessVie
     return handle_wrong_canister_id_error(id, (canister_id) => dapp_query_access(canister_id, id));
 };
 
-export const proxy_query_dapp_access_by_id = async (
-    id: string,
-): Promise<DappAccessView | undefined> => {
+export const proxy_query_dapp_access_by_id = async (id: string): Promise<DappAccessView | undefined> => {
     return (
         (await proxy_query<DappAccessView>(`/storage/dapp/access/${encodeURIComponent(id)}`)) ??
         (await query_dapp_access_by_id(id))

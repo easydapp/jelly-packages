@@ -1,5 +1,6 @@
 import { Actor, HttpAgent } from '@dfinity/agent';
 import { IDL } from '@dfinity/candid';
+
 import { IC_HTTP_HOST } from './host';
 
 const anonymous_creator = async <T>(idlFactory: IDL.InterfaceFactory, canisterId: string) => {

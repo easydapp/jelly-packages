@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentIdentityValue, PlainComponentIdentityValue } from '..';
 import { ComponentId } from '../../../common/identity';
 import { input_value_get_used_component, InputValue } from '../../../common/refer';
@@ -106,9 +107,7 @@ export const identity_ic_metadata_get_value = async (
 };
 
 // get used component
-export const identity_ic_metadata_get_used_component = (
-    self: IdentityIcMetadata,
-): ComponentId[] => {
+export const identity_ic_metadata_get_used_component = (self: IdentityIcMetadata): ComponentId[] => {
     const used: ComponentId[] = [];
     if (self.connect) used.push(...input_value_get_used_component(self.connect));
     return used;

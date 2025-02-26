@@ -1,9 +1,4 @@
-import {
-    check_evm_gas_price,
-    check_evm_nonce,
-    check_evm_pay_value,
-    handle_evm_wallet_error,
-} from '.';
+import { check_evm_gas_price, check_evm_nonce, check_evm_pay_value, handle_evm_wallet_error } from '.';
 import { get_cached_call_result } from '../..';
 import { deepClone } from '../../../../../common/clones';
 import { CallingData, EvmActionData } from '../../../../../runtime/calling';
@@ -140,10 +135,7 @@ export const call_evm_transfer_action = async (
     return result;
 };
 
-const check_evm_transfer_to = (
-    ref_transfer_to: InputValue,
-    runtime_values: RuntimeValues,
-): string | undefined => {
+const check_evm_transfer_to = (ref_transfer_to: InputValue, runtime_values: RuntimeValues): string | undefined => {
     const transfer_to = runtime_values.find_input_value<string>(ref_transfer_to, 'text');
     if (transfer_to === undefined) return undefined;
     if (!evm_address_check(transfer_to)) {

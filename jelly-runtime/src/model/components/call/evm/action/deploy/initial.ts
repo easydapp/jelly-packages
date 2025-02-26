@@ -12,9 +12,7 @@ export interface EvmDeployInitialCode {
     code: CodeContent;
 }
 
-export const evm_deploy_initial_code_get_used_component = (
-    self: EvmDeployInitialCode,
-): ComponentId[] => {
+export const evm_deploy_initial_code_get_used_component = (self: EvmDeployInitialCode): ComponentId[] => {
     const used: ComponentId[] = [];
     for (const code_value of self.data ?? []) {
         used.push(...code_value_get_used_component(code_value));
@@ -42,9 +40,7 @@ export const match_evm_deploy_initial_async = async <T>(
     throw new Error('invalid evm deploy initial');
 };
 
-export const evm_action_deploy_initial_get_used_component = (
-    self: EvmDeployInitial,
-): ComponentId[] => {
+export const evm_action_deploy_initial_get_used_component = (self: EvmDeployInitial): ComponentId[] => {
     const used: ComponentId[] = [];
     match_evm_deploy_initial(self, {
         code: (code) => used.push(...evm_deploy_initial_code_get_used_component(code)),
@@ -64,12 +60,7 @@ export const check_evm_deploy_initial = async (
         code: async (code) => {
             const data = runtime_values.find_data(endpoints, code.data ?? []);
             if (data === undefined) return undefined;
-            const value = await doFunctionTransformByCodeContent(
-                code.code,
-                codes,
-                [['data', data]],
-                code_executor,
-            );
+            const value = await doFunctionTransformByCodeContent(code.code, codes, [['data', data]], code_executor);
             for (const v of value) unwrapped.push(v);
             return unwrapped;
         },

@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { same } from '../../../../common/same';
 import { ViewTextMetadataStyle } from '../text';
 

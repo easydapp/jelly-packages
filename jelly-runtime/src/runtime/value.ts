@@ -1,5 +1,6 @@
 import { link_type_is_match_js_value, LinkType } from '@jellypack/types/lib/types';
 import { link_value_to_js_value } from '@jellypack/types/lib/values';
+
 import { deepClone } from '../common/clones';
 import { same } from '../common/same';
 import { ComponentId } from '../model/common/identity';
@@ -14,7 +15,10 @@ import {
 import { link_component_get_output_type } from '../model/components';
 
 // Introduce the output of nodes
-export interface EndpointOutput<T> { value: T | undefined; spend: number }
+export interface EndpointOutput<T> {
+    value: T | undefined;
+    spend: number;
+}
 
 export class RuntimeValue {
     values: any[];
@@ -147,8 +151,7 @@ export class RuntimeValues {
                     ty = refer_value_get_type(refer, ty);
                     // 5. read value
                     output = refer_value_get_value(refer, output);
-                    if (!link_type_is_match_js_value(ty, output))
-                        throw new Error(`can not find endpoint type`);
+                    if (!link_type_is_match_js_value(ty, output)) throw new Error(`can not find endpoint type`);
                     return deepClone(output);
                 },
             });

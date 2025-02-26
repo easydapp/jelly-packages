@@ -7,9 +7,7 @@ export const check_evm_abi_item = (api: EvmApi): AbiItem => {
         origin: (origin) => {
             const items: AbiItem[] = JSON.parse(origin.abi);
             const item =
-                origin.index !== undefined
-                    ? items[origin.index]
-                    : items.find((item) => item.name === origin.name);
+                origin.index !== undefined ? items[origin.index] : items.find((item) => item.name === origin.name);
             if (!item) throw new Error('can not find function');
             return item;
         },

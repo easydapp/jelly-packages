@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../../common/identity';
 import { input_value_get_used_component, InputValue } from '../../common/refer';
 
@@ -9,9 +10,7 @@ export interface InteractionChooseTipMetadata {
 }
 
 // get output type
-export const interaction_choose_tip_metadata_get_output_type = (
-    _self: InteractionChooseTipMetadata,
-): LinkType => {
+export const interaction_choose_tip_metadata_get_output_type = (_self: InteractionChooseTipMetadata): LinkType => {
     return 'integer';
 };
 

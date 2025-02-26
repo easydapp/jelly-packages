@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../../common/identity';
 
 export interface IdentityHttpMetadata {
@@ -33,18 +34,14 @@ export const identity_http_metadata_get_anonymous_value = (): IdentityHttpOutput
 };
 
 // get value
-export const identity_http_metadata_get_value = (
-    self: IdentityHttpMetadata,
-): IdentityHttpOutput => {
+export const identity_http_metadata_get_value = (self: IdentityHttpMetadata): IdentityHttpOutput => {
     return {
         proxy: self.proxy ?? 'https://p.easydapp.ai',
     };
 };
 
 // get used component
-export const identity_http_metadata_get_used_component = (
-    _self: IdentityHttpMetadata,
-): ComponentId[] => {
+export const identity_http_metadata_get_used_component = (_self: IdentityHttpMetadata): ComponentId[] => {
     const used: ComponentId[] = [];
     return used;
 };

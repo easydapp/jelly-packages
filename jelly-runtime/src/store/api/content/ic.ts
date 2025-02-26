@@ -7,9 +7,7 @@ export interface OriginInternetComputerApi {
     method: string;
 }
 
-export type InternetComputerApi =
-    | { single: SingleInternetComputerApi }
-    | { origin: OriginInternetComputerApi };
+export type InternetComputerApi = { single: SingleInternetComputerApi } | { origin: OriginInternetComputerApi };
 
 export const match_internet_computer_api = <T>(
     self: InternetComputerApi,

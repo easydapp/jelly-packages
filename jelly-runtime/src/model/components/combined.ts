@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { CombinedAnchor } from '../../store/combined';
 import { CombinedMetadata } from '../combined';
 import { ComponentId } from '../common/identity';
@@ -43,9 +44,7 @@ export interface ComponentCombinedMetadata {
 //     value?: InputValue;
 // };
 
-export const component_combined_get_output_type = (
-    self: ComponentCombined,
-): LinkType | undefined => {
+export const component_combined_get_output_type = (self: ComponentCombined): LinkType | undefined => {
     return self.metadata.metadata?.output;
 };
 

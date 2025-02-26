@@ -16,8 +16,5 @@ export interface PlugInterface {
     principalId?: string;
     accountId?: string;
 
-    createActor: <T>(_: {
-        canisterId: string;
-        interfaceFactory: IDL.InterfaceFactory;
-    }) => Promise<ActorSubclass<T>>;
+    createActor: <T>(_: { canisterId: string; interfaceFactory: IDL.InterfaceFactory }) => Promise<ActorSubclass<T>>;
 }

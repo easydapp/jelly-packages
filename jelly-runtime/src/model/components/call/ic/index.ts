@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import { get_identity_value_by_id } from '..';
 import { CallingData } from '../../../../runtime/calling';
 import { RuntimeValues } from '../../../../runtime/value';
@@ -13,10 +14,7 @@ import {
 import { ComponentId } from '../../../common/identity';
 import { AllEndpoints } from '../../../common/lets';
 import { ComponentIdentityValue } from '../../identity';
-import {
-    ComponentIdentityIcValue,
-    identity_ic_metadata_get_anonymous_value,
-} from '../../identity/ic';
+import { ComponentIdentityIcValue, identity_ic_metadata_get_anonymous_value } from '../../identity/ic';
 import { call_ic_action, ic_action_get_used_component, IcAction } from './action';
 import { ExecuteIcActionCall } from './action/call';
 
@@ -68,12 +66,7 @@ export const get_call_ic_value = async (
         identity_metadata =
             self.identity === undefined
                 ? identity_ic_metadata_get_anonymous_value()
-                : (
-                      await get_identity_value_by_id<{ ic: ComponentIdentityIcValue }>(
-                          self.identity,
-                          identity,
-                      )
-                  )?.ic;
+                : (await get_identity_value_by_id<{ ic: ComponentIdentityIcValue }>(self.identity, identity))?.ic;
     } finally {
         calling.set_connecting(false); // ! Identity link
     }
@@ -83,8 +76,7 @@ export const get_call_ic_value = async (
     calling.set_identity_value({ ic: identity_metadata }); // ! Save identity
 
     // Check if the wallet is online
-    if (!(await identity_metadata.is_connected()))
-        throw new Error(`Wallet ${identity_metadata.wallet} is lost.`);
+    if (!(await identity_metadata.is_connected())) throw new Error(`Wallet ${identity_metadata.wallet} is lost.`);
 
     // 2. do action
     const value = call_ic_action(

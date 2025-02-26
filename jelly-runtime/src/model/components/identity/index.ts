@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../../common/identity';
 import { Endpoint } from '../../common/lets';
 import { InputValue } from '../../common/refer';
@@ -118,16 +119,11 @@ export const component_identity_get_output_value = async (
     identity: Record<ComponentId, ComponentIdentityValue>,
     connecting: (id: ComponentId, connecting: boolean) => void,
 ): Promise<IdentityOutput | undefined> => {
-    return await match_identity_inner_metadata_async<IdentityOutput | undefined>(
-        self.metadata.metadata,
-        {
-            http: async (http) => identity_http_metadata_get_value(http),
-            ic: async (ic) =>
-                await identity_ic_metadata_get_value(ic, self.id, identity, connecting),
-            evm: async (evm) =>
-                await identity_evm_metadata_get_value(evm, self.id, identity, connecting),
-        },
-    );
+    return await match_identity_inner_metadata_async<IdentityOutput | undefined>(self.metadata.metadata, {
+        http: async (http) => identity_http_metadata_get_value(http),
+        ic: async (ic) => await identity_ic_metadata_get_value(ic, self.id, identity, connecting),
+        evm: async (evm) => await identity_evm_metadata_get_value(evm, self.id, identity, connecting),
+    });
 };
 
 export const component_identity_get_used_component = (self: ComponentIdentity): ComponentId[] => {

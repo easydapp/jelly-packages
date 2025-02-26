@@ -1,4 +1,5 @@
 import saferEval from 'safer-eval';
+
 import { MASKS, OpenHex, OpenIc, OpenJSON, OpenNumber, OpenType, Principal } from './common';
 
 // SaferEval and Function

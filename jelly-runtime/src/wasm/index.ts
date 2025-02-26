@@ -1,6 +1,7 @@
 import { MotokoResult } from '@choptop/haw';
 import { CodeItem } from '@jellypack/types/lib/code';
 import { parse_factory } from '@jellypack/types/lib/open/open-json';
+
 import { CombinedMetadata, LinkComponent } from '../model';
 import { ComponentId } from '../model/common/identity';
 import { ApiData, ApiDataAnchor } from '../store/api';

@@ -1,10 +1,6 @@
 import { ethers } from 'ethers';
-import {
-    check_evm_gas_limit,
-    check_evm_gas_price,
-    check_evm_nonce,
-    handle_evm_wallet_error,
-} from '..';
+
+import { check_evm_gas_limit, check_evm_gas_price, check_evm_nonce, handle_evm_wallet_error } from '..';
 import { get_cached_call_result } from '../../..';
 import { deepClone } from '../../../../../../common/clones';
 import { CallingData, EvmActionData } from '../../../../../../runtime/calling';
@@ -16,21 +12,12 @@ import { AllEndpoints } from '../../../../../common/lets';
 import { input_value_get_used_component, InputValue } from '../../../../../common/refer';
 import { EvmWallet } from '../../../../../common/wallet/evm';
 import { AbiItem } from '../../../../../types/abi';
-import {
-    checkEvmValue,
-    evm_address_check,
-    evm_param_to_type,
-    evm_tx_check,
-} from '../../../../../types/abi/types';
+import { checkEvmValue, evm_address_check, evm_param_to_type, evm_tx_check } from '../../../../../types/abi/types';
 import { EvmChain } from '../../../../../types/evm';
 import { ComponentIdentityEvmValue } from '../../../../identity/evm';
 import { check_evm_abi } from './abi';
 import { check_evm_bytecode } from './bytecode';
-import {
-    check_evm_deploy_initial,
-    evm_action_deploy_initial_get_used_component,
-    EvmDeployInitial,
-} from './initial';
+import { check_evm_deploy_initial, evm_action_deploy_initial_get_used_component, EvmDeployInitial } from './initial';
 
 export type ExecuteEvmActionDeploy = (param: {
     chain: EvmChain;
@@ -102,13 +89,7 @@ export const call_evm_deploy_action = async (
     // 6. get initial
     let initial: any[] | undefined = undefined;
     if (self.initial) {
-        initial = await check_evm_deploy_initial(
-            self.initial,
-            runtime_values,
-            endpoints,
-            codes,
-            code_executor,
-        );
+        initial = await check_evm_deploy_initial(self.initial, runtime_values, endpoints, codes, code_executor);
         if (initial === undefined) return undefined;
     }
 
@@ -117,16 +98,7 @@ export const call_evm_deploy_action = async (
 
     // 8. build actor
     const actor = new ethers.ContractFactory(JSON.parse(abi), bytecode, identity_metadata.signer);
-    console.debug(
-        `🚀 ~ call: ~ actor:`,
-        actor,
-        gas_limit,
-        gas_price,
-        nonce,
-        abi,
-        bytecode,
-        initial,
-    );
+    console.debug(`🚀 ~ call: ~ actor:`, actor, gas_limit, gas_price, nonce, abi, bytecode, initial);
 
     // 9. Request
     const key: EvmActionData = {
@@ -146,8 +118,7 @@ export const call_evm_deploy_action = async (
         key,
         alive,
         () => calling.start({ evm: deepClone(key) }), // ! Start call
-        (call_index: number, result: { tx: string; address: string }) =>
-            calling.result(call_index, deepClone(result)), // ! Save the call result
+        (call_index: number, result: { tx: string; address: string }) => calling.result(call_index, deepClone(result)), // ! Save the call result
         (call_index: number) => calling.over(call_index), // ! End call
         async () => {
             console.debug(`🚀 ~ call evm key:`, key);
@@ -204,9 +175,7 @@ export const call_evm_deploy_action = async (
                     }
                     // 0xe1abbaf8cb8f4Da3658182fAe1A27E4f123d6634
                     const address =
-                        typeof contract.target === 'string'
-                            ? contract.target
-                            : await contract.target.getAddress();
+                        typeof contract.target === 'string' ? contract.target : await contract.target.getAddress();
                     if (!evm_address_check(address)) {
                         console.error('deploy contract failed', address, contract);
                         throw new Error(`deploy contract failed: ${address}`);

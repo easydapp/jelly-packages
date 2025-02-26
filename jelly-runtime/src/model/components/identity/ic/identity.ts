@@ -1,6 +1,7 @@
 import { Actor, HttpAgent, Identity } from '@dfinity/agent';
 import { IDL } from '@dfinity/candid';
 import { Ed25519KeyIdentity } from '@dfinity/identity';
+
 import { IC_HTTP_HOST } from '../../../../canisters/host';
 import { hex2array } from '../../../../common/hex';
 import { ComponentIdentityIcValue } from '../ic';
@@ -29,9 +30,7 @@ export const getActorCreatorByAgent = (agent: HttpAgent): ActorCreator => {
     };
 };
 
-export const getIdentityBySecretKey = async (
-    secret_key: string,
-): Promise<ComponentIdentityIcValue> => {
+export const getIdentityBySecretKey = async (secret_key: string): Promise<ComponentIdentityIcValue> => {
     const identity = await getIdentityFromSecretKey(secret_key);
     const owner = identity.getPrincipal().toText();
     const account_id = principal2account(owner);

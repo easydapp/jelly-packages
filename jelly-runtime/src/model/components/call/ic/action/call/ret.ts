@@ -8,10 +8,7 @@ export interface IcCallRet {
     code: CodeContent;
 }
 
-export const match_ic_call_ret = <T>(
-    self: IcCallRet,
-    { code }: { code: (code: CodeContent) => T },
-): T => {
+export const match_ic_call_ret = <T>(self: IcCallRet, { code }: { code: (code: CodeContent) => T }): T => {
     if ('code' in self) return code(self.code);
     throw new Error('invalid ic call ret');
 };
@@ -27,11 +24,7 @@ export const parse_by_ic_call_ret = async (
     self: IcCallRet,
     codes: Record<CodeDataAnchor, CodeData>,
     arg: WrappedCandidType[],
-    {
-        response,
-        unwrapped,
-        data_of_args,
-    }: { response: any; unwrapped: any[]; data_of_args: any | undefined },
+    { response, unwrapped, data_of_args }: { response: any; unwrapped: any[]; data_of_args: any | undefined },
     code_executor: CodeExecutor | undefined,
 ) => {
     return await match_ic_call_ret_async(self, {

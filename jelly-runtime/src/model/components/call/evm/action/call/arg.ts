@@ -23,7 +23,9 @@ export const evm_call_arg_code_get_used_component = (self: EvmCallArgCode): Comp
     return used;
 };
 
-export interface EvmCallArg { code: EvmCallArgCode }
+export interface EvmCallArg {
+    code: EvmCallArgCode;
+}
 
 export const match_evm_call_arg = <T>(
     self: EvmCallArg,

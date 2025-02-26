@@ -1,4 +1,5 @@
 import { CodeItem } from '@jellypack/types/lib/code';
+
 import { CodeDataAnchor } from '../../store/code';
 
 export interface OriginCodeContent {

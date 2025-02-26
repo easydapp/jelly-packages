@@ -265,11 +265,7 @@ const isPrincipal = (value: any): boolean => {
 //     for (let i = 0; i < length; i++) if (!isNat8((value as any)[i])) return false;
 //     return true;
 // };
-const isVec = (
-    value: any,
-    subtype: WrappedCandidType,
-    recursions: Record<number, WrappedCandidType>,
-): boolean => {
+const isVec = (value: any, subtype: WrappedCandidType, recursions: Record<number, WrappedCandidType>): boolean => {
     if (!isArray(value)) return false;
     const length = (value as any)['length'];
     if (typeof length !== 'number') return false;
@@ -302,8 +298,7 @@ export const isRecord = (
     const valueKeys = Object.keys(value);
     if (valueKeys.length !== subitems.length) return false;
     for (const subitem of subitems) {
-        if (!check_wrapped_candid_value(subitem[1], (value as any)[subitem[0]], recursions))
-            return false;
+        if (!check_wrapped_candid_value(subitem[1], (value as any)[subitem[0]], recursions)) return false;
         valueKeys.splice(
             valueKeys.findIndex((key) => key === subitem[0]),
             1,
@@ -325,11 +320,7 @@ export const isVariant = (
             const findSubitems = subitems.filter((subitem) => subitem[0] === key); // find the chosen key
             if (findSubitems.length !== 1) return false;
             const subitem = findSubitems[0];
-            return check_wrapped_candid_value(
-                subitem[1] ?? { null: {} },
-                (value as any)[key],
-                recursions,
-            );
+            return check_wrapped_candid_value(subitem[1] ?? { null: {} }, (value as any)[key], recursions);
         } else {
             return false;
         }
@@ -476,9 +467,7 @@ export const mapping_type_to_idl_type = (
             return _IDL.Variant(fields);
         },
         tuple: (tuple) =>
-            _IDL.Tuple(
-                ...tuple.subitems.map((type) => mapping_type_to_idl_type(_IDL, type, rec_records)),
-            ),
+            _IDL.Tuple(...tuple.subitems.map((type) => mapping_type_to_idl_type(_IDL, type, rec_records))),
         unknown: () => _IDL.Unknown,
         empty: () => _IDL.Empty,
         reserved: () => _IDL.Reserved,

@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types';
+
 import { NodeTemplateValidate } from './validate';
 
 export interface NodeTemplate {

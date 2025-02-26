@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../../common/identity';
 import { named_value_get_used_component, NamedValue } from '../../common/refer';
 
@@ -8,15 +9,11 @@ export interface InteractionChooseMetadata {
 }
 
 // get output type
-export const interaction_choose_metadata_get_output_type = (
-    _self: InteractionChooseMetadata,
-): LinkType => {
+export const interaction_choose_metadata_get_output_type = (_self: InteractionChooseMetadata): LinkType => {
     return 'text';
 };
 
-export const interaction_choose_metadata_get_used_component = (
-    self: InteractionChooseMetadata,
-): ComponentId[] => {
+export const interaction_choose_metadata_get_used_component = (self: InteractionChooseMetadata): ComponentId[] => {
     return self.values.flatMap((named_value) => named_value_get_used_component(named_value));
 };
 

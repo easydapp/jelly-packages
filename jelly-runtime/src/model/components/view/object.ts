@@ -8,9 +8,7 @@ export interface ViewObjectMetadata {
     style?: string;
 }
 
-export const view_object_metadata_get_used_component = (
-    self: ViewObjectMetadata,
-): ComponentId[] => {
+export const view_object_metadata_get_used_component = (self: ViewObjectMetadata): ComponentId[] => {
     return input_value_get_used_component(self.value);
 };
 

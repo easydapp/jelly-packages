@@ -92,12 +92,7 @@ export const get_http_body_value = async (
             const data = runtime_values.find_data(endpoints, code.data ?? []);
             if (data === undefined) return undefined;
             handle(deepClone(data));
-            return await doFunctionTransformByCodeContent(
-                code.code,
-                codes,
-                [['data', data]],
-                code_executor,
-            );
+            return await doFunctionTransformByCodeContent(code.code, codes, [['data', data]], code_executor);
         },
     });
 };

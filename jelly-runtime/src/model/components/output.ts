@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { ComponentId } from '../common/identity';
 import { Endpoint } from '../common/lets';
 import { code_value_get_used_component, CodeValue } from '../common/refer';

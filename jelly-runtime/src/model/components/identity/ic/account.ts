@@ -1,5 +1,6 @@
 import { getCrc32 } from '@dfinity/principal/lib/cjs/utils/getCrc';
 import { sha224 } from '@dfinity/principal/lib/cjs/utils/sha224';
+
 import { string2array } from '../../../../common/arrays';
 import { array2hex, hex2array } from '../../../../common/hex';
 import { string2principal } from '../../../../common/principal';
@@ -10,10 +11,7 @@ export const principal2account = (principal: string, subaccount?: number | numbe
 };
 
 // principal2account_array
-export const principal2account_array = (
-    principal: string,
-    subaccount?: number | number[],
-): number[] => {
+export const principal2account_array = (principal: string, subaccount?: number | number[]): number[] => {
     if (typeof subaccount === 'number') {
         subaccount = [
             (subaccount >> 24) & 0xff,

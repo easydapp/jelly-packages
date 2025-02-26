@@ -1,13 +1,4 @@
-import {
-    EXCLUDES,
-    MASKS,
-    OpenHex,
-    OpenIc,
-    OpenJSON,
-    OpenNumber,
-    OpenType,
-    Principal,
-} from './common';
+import { EXCLUDES, MASKS, OpenHex, OpenIc, OpenJSON, OpenNumber, OpenType, Principal } from './common';
 
 // only eval
 // document

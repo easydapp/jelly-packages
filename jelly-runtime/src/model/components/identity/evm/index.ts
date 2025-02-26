@@ -1,5 +1,6 @@
 import { LinkType } from '@jellypack/types/lib/types';
 import { AbstractSigner, Provider } from 'ethers';
+
 import { ComponentIdentityValue, PlainComponentIdentityValue } from '..';
 import { ComponentId } from '../../../common/identity';
 import { input_value_get_used_component, InputValue } from '../../../common/refer';
@@ -65,14 +66,11 @@ export const identity_evm_metadata_has_value = (
 };
 
 // get default value
-export const identity_evm_metadata_get_anonymous_value = (
-    chain: EvmChain,
-): ComponentIdentityEvmValue => get_evm_anonymous(chain);
+export const identity_evm_metadata_get_anonymous_value = (chain: EvmChain): ComponentIdentityEvmValue =>
+    get_evm_anonymous(chain);
 
 // get default output
-export const identity_evm_metadata_get_anonymous_output_value = (
-    chain: EvmChain,
-): IdentityEvmOutput => {
+export const identity_evm_metadata_get_anonymous_output_value = (chain: EvmChain): IdentityEvmOutput => {
     const anonymous = get_evm_anonymous(chain);
     return {
         chain: anonymous.chain,
@@ -121,9 +119,7 @@ export const identity_evm_metadata_get_value = async (
 };
 
 // get used component
-export const identity_evm_metadata_get_used_component = (
-    self: IdentityEvmMetadata,
-): ComponentId[] => {
+export const identity_evm_metadata_get_used_component = (self: IdentityEvmMetadata): ComponentId[] => {
     const used: ComponentId[] = [];
     if (self.connect) used.push(...input_value_get_used_component(self.connect));
     return used;

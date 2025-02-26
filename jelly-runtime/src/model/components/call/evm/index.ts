@@ -13,22 +13,11 @@ import { ComponentId } from '../../../common/identity';
 import { AllEndpoints } from '../../../common/lets';
 import { EvmChain } from '../../../types/evm';
 import { ComponentIdentityValue } from '../../identity';
-import {
-    ComponentIdentityEvmValue,
-    identity_evm_metadata_get_anonymous_value,
-} from '../../identity/evm';
-import {
-    call_evm_action,
-    evm_action_get_used_component,
-    EvmAction,
-    match_evm_action,
-} from './action';
+import { ComponentIdentityEvmValue, identity_evm_metadata_get_anonymous_value } from '../../identity/evm';
+import { call_evm_action, evm_action_get_used_component, EvmAction, match_evm_action } from './action';
 import { ExecuteEvmActionCall } from './action/call';
 import { ExecuteEvmActionDeploy } from './action/deploy';
-import {
-    ExecuteEvmActionTransaction,
-    ExecuteEvmActionTransactionEstimateGas,
-} from './action/transaction';
+import { ExecuteEvmActionTransaction, ExecuteEvmActionTransactionEstimateGas } from './action/transaction';
 import { ExecuteEvmActionTransfer } from './action/transfer';
 
 export interface CallEvmMetadata {
@@ -89,12 +78,7 @@ export const get_call_evm_value = async (
         identity_metadata =
             self.identity === undefined
                 ? identity_evm_metadata_get_anonymous_value(self.chain)
-                : (
-                      await get_identity_value_by_id<{ evm: ComponentIdentityEvmValue }>(
-                          self.identity,
-                          identity,
-                      )
-                  )?.evm;
+                : (await get_identity_value_by_id<{ evm: ComponentIdentityEvmValue }>(self.identity, identity))?.evm;
     } finally {
         calling.set_connecting(false); // ! Identity link
     }
@@ -104,8 +88,7 @@ export const get_call_evm_value = async (
     calling.set_identity_value({ evm: identity_metadata }); // ! Save identity
 
     // Check if the wallet is online
-    if (!(await identity_metadata.is_connected()))
-        throw new Error(`Wallet ${identity_metadata.wallet} is lost.`);
+    if (!(await identity_metadata.is_connected())) throw new Error(`Wallet ${identity_metadata.wallet} is lost.`);
 
     // 2. do action
     const value = await call_evm_action(

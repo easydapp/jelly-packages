@@ -6,12 +6,7 @@ import { CodeExecutor, ParseFuncCandid, ParseServiceCandid } from '../../../../.
 import { ComponentId } from '../../../../common/identity';
 import { AllEndpoints } from '../../../../common/lets';
 import { ComponentIdentityIcValue } from '../../../identity/ic';
-import {
-    call_ic_call_action,
-    ExecuteIcActionCall,
-    ic_action_call_get_used_component,
-    IcActionCall,
-} from './call';
+import { call_ic_call_action, ExecuteIcActionCall, ic_action_call_get_used_component, IcActionCall } from './call';
 
 export interface IcAction {
     call: IcActionCall;

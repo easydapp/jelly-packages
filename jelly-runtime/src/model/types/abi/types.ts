@@ -251,8 +251,7 @@ export const evm_param_to_type = (param: AbiParam): EvmType => {
             };
         }
 
-        if (ty === 'address')
-            return { address: { type: ty, payable: param.internalType === 'address payable' } };
+        if (ty === 'address') return { address: { type: ty, payable: param.internalType === 'address payable' } };
         if (ty === 'address payable') return { address: { type: ty, payable: true } };
 
         if (ty.startsWith('bytes')) {
@@ -291,10 +290,7 @@ export const checkEvmValue = (type: EvmType, value: any): boolean => {
         address: () => typeof value === 'string' && evm_address_check(value),
         bytes: (bytes) => {
             if (typeof value === 'string') {
-                return (
-                    evm_bytecode_check(value) &&
-                    (!bytes.length || (value.length - 2) / 2 === bytes.length)
-                );
+                return evm_bytecode_check(value) && (!bytes.length || (value.length - 2) / 2 === bytes.length);
             }
             return value instanceof Uint8Array && (!bytes.length || value.length === bytes.length);
         },

@@ -1,17 +1,11 @@
 import { stringify_factory } from '@jellypack/types/lib/open/open-json';
+
 import { handle_wasm_code_result } from '../../../wasm';
 
-export const doExecuteByRemote = async (
-    code: string,
-    args: [string, any][],
-    debug: boolean,
-): Promise<any> => {
+export const doExecuteByRemote = async (code: string, args: [string, any][], debug: boolean): Promise<any> => {
     const stringify = stringify_factory(JSON.stringify);
 
-    const args_mapping = args.map(([name, value]) => [
-        name,
-        value === undefined ? '' : stringify(value),
-    ]);
+    const args_mapping = args.map(([name, value]) => [name, value === undefined ? '' : stringify(value)]);
     const args_json = JSON.stringify(args_mapping);
 
     if (debug) {

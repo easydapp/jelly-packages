@@ -1,5 +1,6 @@
 import { LinkType } from '@jellypack/types/lib/types';
 import _ from 'lodash';
+
 import { ViewHtmlMetadataStyle } from '../html';
 import { image_view_is_supported_type } from './image';
 

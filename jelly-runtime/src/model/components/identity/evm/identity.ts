@@ -1,10 +1,7 @@
 import { ethers, SigningKey, Wallet } from 'ethers';
+
 import { hex2array } from '../../../../common/hex';
-import {
-    EvmChain,
-    get_evm_chain_id_by_chain,
-    get_evm_default_rpc_by_chain,
-} from '../../../types/evm';
+import { EvmChain, get_evm_chain_id_by_chain, get_evm_default_rpc_by_chain } from '../../../types/evm';
 import { ComponentIdentityEvmValue } from '../evm';
 
 export const get_evm_identity = (chain: EvmChain, secret: string): ComponentIdentityEvmValue => {
