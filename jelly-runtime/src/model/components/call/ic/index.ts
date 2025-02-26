@@ -39,7 +39,7 @@ export const get_call_ic_value = async (
     id: ComponentId,
     endpoints: AllEndpoints | undefined,
     trigger: ComponentId | undefined,
-    set_identity_triggered: (identity: ComponentId) => void,
+    identity_triggered: Record<ComponentId, boolean>,
     identity: Record<ComponentId, ComponentIdentityValue>,
     runtime_values: RuntimeValues,
     codes: Record<CodeDataAnchor, CodeData>,
@@ -59,7 +59,8 @@ export const get_call_ic_value = async (
     if (alive === undefined) return undefined;
 
     // 1. identity
-    set_identity_triggered(self.identity ?? id);
+    if (identity_triggered[self.identity ?? id]) return undefined; // do not trigger again this time
+    identity_triggered[self.identity ?? id] = true;
 
     calling.set_connecting(true); // ! Identity link
     let identity_metadata: ComponentIdentityIcValue | undefined;

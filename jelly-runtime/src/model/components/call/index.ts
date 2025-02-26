@@ -1,4 +1,5 @@
 import { LinkType } from '@jellypack/types/lib/types';
+
 import { deepClone } from '../../../common/clones';
 import { same } from '../../../common/same';
 import { CallingData } from '../../../runtime/calling';
@@ -13,17 +14,9 @@ import { ComponentIdentityValue } from '../identity';
 import { call_evm_metadata_get_used_component, CallEvmMetadata, get_call_evm_value } from './evm';
 import { ExecuteEvmActionCall } from './evm/action/call';
 import { ExecuteEvmActionDeploy } from './evm/action/deploy';
-import {
-    ExecuteEvmActionTransaction,
-    ExecuteEvmActionTransactionEstimateGas,
-} from './evm/action/transaction';
+import { ExecuteEvmActionTransaction, ExecuteEvmActionTransactionEstimateGas } from './evm/action/transaction';
 import { ExecuteEvmActionTransfer } from './evm/action/transfer';
-import {
-    call_http_metadata_get_used_component,
-    CallHttpMetadata,
-    ExecuteHttpCall,
-    get_call_http_value,
-} from './http';
+import { call_http_metadata_get_used_component, CallHttpMetadata, ExecuteHttpCall, get_call_http_value } from './http';
 import { call_ic_metadata_get_used_component, CallIcMetadata, get_call_ic_value } from './ic';
 import { ExecuteIcActionCall } from './ic/action/call';
 
@@ -34,10 +27,7 @@ export interface ComponentCall {
     output: LinkType;
 }
 
-export type CallMetadata =
-    | { http: CallHttpMetadata }
-    | { ic: CallIcMetadata }
-    | { evm: CallEvmMetadata };
+export type CallMetadata = { http: CallHttpMetadata } | { ic: CallIcMetadata } | { evm: CallEvmMetadata };
 
 export const match_call_metadata = <T>(
     self: CallMetadata,
@@ -113,7 +103,7 @@ export const get_call_value = async (
     self: ComponentCall,
     endpoints: AllEndpoints | undefined,
     trigger: ComponentId | undefined,
-    set_identity_triggered: (identity: ComponentId) => void,
+    identity_triggered: Record<ComponentId, boolean>,
     identity: Record<ComponentId, ComponentIdentityValue>,
     runtime_values: RuntimeValues,
     apis: Record<ApiDataAnchor, ApiData>,
@@ -137,7 +127,7 @@ export const get_call_value = async (
                 self.id,
                 endpoints,
                 trigger,
-                set_identity_triggered,
+                identity_triggered,
                 identity,
                 runtime_values,
                 codes,
@@ -152,7 +142,7 @@ export const get_call_value = async (
                 self.id,
                 endpoints,
                 trigger,
-                set_identity_triggered,
+                identity_triggered,
                 identity,
                 runtime_values,
                 codes,
@@ -170,7 +160,7 @@ export const get_call_value = async (
                 self.id,
                 endpoints,
                 trigger,
-                set_identity_triggered,
+                identity_triggered,
                 identity,
                 runtime_values,
                 codes,

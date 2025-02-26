@@ -469,7 +469,7 @@ export class CombinedRuntime {
                             call,
                             this.components[id]?.endpoints,
                             trigger,
-                            (identity) => (identity_triggered[identity] = true),
+                            identity_triggered,
                             this.identity,
                             this.runtime_values,
                             this.apis,
