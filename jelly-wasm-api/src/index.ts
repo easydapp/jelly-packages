@@ -8,10 +8,7 @@ import {
     CheckedCombined,
     handle_wasm_code_result,
 } from '@jellypack/runtime/lib/wasm';
-import {
-    WrappedCandidTypeFunction,
-    WrappedCandidTypeService,
-} from '@jellypack/runtime/lib/wasm/candid';
+import { WrappedCandidTypeFunction, WrappedCandidTypeService } from '@jellypack/runtime/lib/wasm/candid';
 import { stringify_factory } from '@jellypack/types/lib/open/open-json';
 import { LinkValue } from '@jellypack/types/lib/values';
 import init, * as wasm from '@jellypack/wasm';
@@ -34,19 +31,12 @@ try {
 
 // ================ code ================
 
-export const execute_code = async (
-    code: string,
-    args: [string, any][],
-    debug: boolean,
-): Promise<any | undefined> => {
+export const execute_code = async (code: string, args: [string, any][], debug: boolean): Promise<any | undefined> => {
     await initializing;
 
     const stringify = stringify_factory(JSON.stringify);
 
-    const args_mapping = args.map(([name, value]) => [
-        name,
-        value === undefined ? '' : stringify(value),
-    ]);
+    const args_mapping = args.map(([name, value]) => [name, value === undefined ? '' : stringify(value)]);
     const args_json = JSON.stringify(args_mapping);
 
     if (debug) {
@@ -200,10 +190,7 @@ export const parse_func_candid = async <T>(
 
 // ================ check ================
 
-export const find_all_anchors = async (
-    components: LinkComponent[],
-    debug: boolean,
-): Promise<CheckedAnchors> => {
+export const find_all_anchors = async (components: LinkComponent[], debug: boolean): Promise<CheckedAnchors> => {
     await initializing;
 
     if (debug) {
@@ -259,8 +246,7 @@ export const find_origin_codes = async (
     const s = Date.now();
     let value: any = wasm.find_origin_codes(components_json, fetch_json);
     const e = Date.now();
-    if (debug)
-        console.debug('find_origin_codes wasm spend', e - s, 'ms', [components_json, fetch_json]);
+    if (debug) console.debug('find_origin_codes wasm spend', e - s, 'ms', [components_json, fetch_json]);
 
     if (debug) {
         console.debug('find_origin_codes result [stringify]: ', [value]);
@@ -279,10 +265,7 @@ export const find_origin_codes = async (
     return value;
 };
 
-export const find_template_origin_codes = async (
-    nodes: TrimmedNode[],
-    debug: boolean,
-): Promise<CheckedCodeItem[]> => {
+export const find_template_origin_codes = async (nodes: TrimmedNode[], debug: boolean): Promise<CheckedCodeItem[]> => {
     await initializing;
 
     if (debug) {
@@ -374,22 +357,13 @@ export const check_template = async (
     const fetch_json = JSON.stringify(fetch);
 
     if (debug) {
-        console.debug('check_template components [stringify]: ', [
-            nodes_json,
-            checked_json,
-            fetch_json,
-        ]);
+        console.debug('check_template components [stringify]: ', [nodes_json, checked_json, fetch_json]);
     }
 
     const s = Date.now();
     let value: any = wasm.check_template(nodes_json, checked_json, fetch_json);
     const e = Date.now();
-    if (debug)
-        console.debug('check_template wasm spend', e - s, 'ms', [
-            nodes_json,
-            checked_json,
-            fetch_json,
-        ]);
+    if (debug) console.debug('check_template wasm spend', e - s, 'ms', [nodes_json, checked_json, fetch_json]);
 
     if (debug) {
         console.debug('check_template result [stringify]: ', [value]);
