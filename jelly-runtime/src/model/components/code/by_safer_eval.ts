@@ -1,3 +1,4 @@
+// ! package safer-eval is not safe
 import saferEval from 'safer-eval';
 
 import { EXCLUDES, MASKS, OpenHex, OpenIc, OpenJSON, OpenNumber, OpenType, Principal } from './common';
