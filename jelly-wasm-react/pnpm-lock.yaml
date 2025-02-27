@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@jellypack/runtime':
-        specifier: ^0.0.1
-        version: 0.0.1
+        specifier: ^0.0.4
+        version: 0.0.4
       '@jellypack/types':
         specifier: ^0.0.2
         version: 0.0.2
       '@jellypack/wasm-api':
-        specifier: ^0.0.1
-        version: 0.0.1
+        specifier: ^0.0.3
+        version: 0.0.3
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -97,7 +97,7 @@ importers:
         specifier: ^2.8.0
         version: 2.8.0(stylelint@16.14.1(typescript@5.7.3))
       tailwindcss:
-        specifier: ^4.0.8
+        specifier: ^4.0.9
         version: 4.0.9
       typescript:
         specifier: ^5.7.3
@@ -426,14 +426,14 @@ packages:
       '@vue/compiler-sfc':
         optional: true
 
-  '@jellypack/runtime@0.0.1':
-    resolution: {integrity: sha512-CGXCtYND/9zsNwDri/pYsnuuX5fKkKTMuCFrh85jcEyMWqCeOVbw6GxYWQMp8xJlp0xzBokq5QdOhFeHXKTbQA==}
+  '@jellypack/runtime@0.0.4':
+    resolution: {integrity: sha512-+6/FmaJ0K3WGi7xO7qtcXVmA/fZyiTce9FTPIxRL0betn1uw3rb6UfKGfgKsO6DqqHFg/bXXjJm/04ZgDAqa2A==}
 
   '@jellypack/types@0.0.2':
     resolution: {integrity: sha512-yXsQStgiDK33alt5kgBAaTI5bya2H9aw35TlXue2J6KpMp5Z9rhg9VILplZm5YbXaQTa8aw5l++G2k2sRxfoDQ==}
 
-  '@jellypack/wasm-api@0.0.1':
-    resolution: {integrity: sha512-k4oCgROdrAZUiO1McKG2obc7UK2++zx++uAkj2xMcnu2BzR3iimKAWxwQkVmukkxhUEzMW8cM1N2EWbg7CK4Lw==}
+  '@jellypack/wasm-api@0.0.3':
+    resolution: {integrity: sha512-WSneygkDPLamlF6IGuwzV2lq3fGziso7m7Y4kQnURugUpkYHKOgyJgvx3EcqRw9LCmuzteDnOL+QCCvmWEvMsQ==}
 
   '@jellypack/wasm@0.0.1':
     resolution: {integrity: sha512-mnViV9kM0zFH7vC2XcQGXyJL+nDE19Xv/3zC2qeJZmPorrEJbGVuiNhI+KUAFjVJ43wMCwU2qlY7ibalSmgUrg==}
@@ -1054,10 +1054,6 @@ packages:
   chokidar@4.0.1:
     resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
     engines: {node: '>= 14.16.0'}
-
-  clones@1.2.0:
-    resolution: {integrity: sha512-FXDYw4TjR8wgPZYui2LeTqWh1BLpfQ8lB6upMtlpDF6WlOOxghmTTxWyngdKTgozqBgKnHbTVwTE+hOHqAykuQ==}
-    engines: {node: '>=4.0.0'}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -1832,11 +1828,6 @@ packages:
   safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
 
-  safer-eval@1.3.6:
-    resolution: {integrity: sha512-DN9tBsZgtUOHODzSfO1nGCLhZtxc7Qq/d8/2SNxQZ9muYXZspSh1fO7HOsrf4lcelBNviAJLCxB/ggmG+jV1aw==}
-    engines: {node: '>=6.0.0'}
-    deprecated: safer-eval IS HARMFUL - so you are warned!
-
   sass@1.85.1:
     resolution: {integrity: sha512-Uk8WpxM5v+0cMR0XjX9KfRIacmSG86RH4DCCZjLU2rFh5tyutt9siAXJ7G+YfxQ99Q6wrRMbMlVl6KqUms71ag==}
     engines: {node: '>=14.0.0'}
@@ -2432,7 +2423,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@jellypack/runtime@0.0.1':
+  '@jellypack/runtime@0.0.4':
     dependencies:
       '@aws-crypto/sha256-js': 5.2.0
       '@choptop/haw': 0.0.13
@@ -2445,7 +2436,6 @@ snapshots:
       ethers: 6.13.5
       lodash: 4.17.21
       query-string: 9.1.1
-      safer-eval: 1.3.6
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -2455,17 +2445,16 @@ snapshots:
       '@dfinity/principal': 2.3.0
       lodash: 4.17.21
 
-  '@jellypack/wasm-api@0.0.1':
+  '@jellypack/wasm-api@0.0.3':
     dependencies:
       '@choptop/haw': 0.0.13
-      '@jellypack/runtime': 0.0.1
+      '@jellypack/runtime': 0.0.4
       '@jellypack/types': 0.0.2
       '@jellypack/wasm': 0.0.1
       bs58: 6.0.0
       ethers: 6.13.5
       lodash: 4.17.21
       query-string: 9.1.1
-      safer-eval: 1.3.6
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3097,8 +3086,6 @@ snapshots:
   chokidar@4.0.1:
     dependencies:
       readdirp: 4.0.2
-
-  clones@1.2.0: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -3792,10 +3779,6 @@ snapshots:
       queue-microtask: 1.2.3
 
   safe-buffer@5.2.1: {}
-
-  safer-eval@1.3.6:
-    dependencies:
-      clones: 1.2.0
 
   sass@1.85.1:
     dependencies:
