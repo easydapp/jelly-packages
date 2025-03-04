@@ -15,8 +15,8 @@ importers:
         specifier: ^0.0.2
         version: 0.0.2
       '@jellypack/wasm-api':
-        specifier: ^0.0.3
-        version: 0.0.3
+        specifier: ^0.0.4
+        version: 0.0.4
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -432,11 +432,11 @@ packages:
   '@jellypack/types@0.0.2':
     resolution: {integrity: sha512-yXsQStgiDK33alt5kgBAaTI5bya2H9aw35TlXue2J6KpMp5Z9rhg9VILplZm5YbXaQTa8aw5l++G2k2sRxfoDQ==}
 
-  '@jellypack/wasm-api@0.0.3':
-    resolution: {integrity: sha512-WSneygkDPLamlF6IGuwzV2lq3fGziso7m7Y4kQnURugUpkYHKOgyJgvx3EcqRw9LCmuzteDnOL+QCCvmWEvMsQ==}
+  '@jellypack/wasm-api@0.0.4':
+    resolution: {integrity: sha512-kTB2f89lYtjJwDPteI3wrgS2Zrwur+BthSNeTRUghAHc3K/ZPLA86qmONlYXd1UNhFsACis1JMMPUaTMunOEaA==}
 
-  '@jellypack/wasm@0.0.1':
-    resolution: {integrity: sha512-mnViV9kM0zFH7vC2XcQGXyJL+nDE19Xv/3zC2qeJZmPorrEJbGVuiNhI+KUAFjVJ43wMCwU2qlY7ibalSmgUrg==}
+  '@jellypack/wasm@0.0.2':
+    resolution: {integrity: sha512-tXP/DbhcjcyfQ67y+o1K0X3sF04VlfZ2Anc26EfUFvIi2T4HLHMyXvdk6LRGoRZc/dRuAGgP85N7b8HcxPMufg==}
 
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
@@ -2445,12 +2445,12 @@ snapshots:
       '@dfinity/principal': 2.3.0
       lodash: 4.17.21
 
-  '@jellypack/wasm-api@0.0.3':
+  '@jellypack/wasm-api@0.0.4':
     dependencies:
       '@choptop/haw': 0.0.13
       '@jellypack/runtime': 0.0.4
       '@jellypack/types': 0.0.2
-      '@jellypack/wasm': 0.0.1
+      '@jellypack/wasm': 0.0.2
       bs58: 6.0.0
       ethers: 6.13.5
       lodash: 4.17.21
@@ -2459,7 +2459,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@jellypack/wasm@0.0.1': {}
+  '@jellypack/wasm@0.0.2': {}
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:

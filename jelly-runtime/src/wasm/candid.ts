@@ -144,8 +144,8 @@ export const match_wrapped_candid_type = <T>(
     },
 ): T => {
     if ('bool' in self) return bool(self.bool);
-    if ('int' in self) return int(self.int);
     if ('nat' in self) return nat(self.nat);
+    if ('int' in self) return int(self.int);
     if ('nat8' in self) return nat8(self.nat8);
     if ('nat16' in self) return nat16(self.nat16);
     if ('nat32' in self) return nat32(self.nat32);
