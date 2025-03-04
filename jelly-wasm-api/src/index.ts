@@ -8,7 +8,11 @@ import {
     CheckedCombined,
     handle_wasm_code_result,
 } from '@jellypack/runtime/lib/wasm';
-import { WrappedCandidTypeFunction, WrappedCandidTypeService } from '@jellypack/runtime/lib/wasm/candid';
+import {
+    WrappedCandidType,
+    WrappedCandidTypeFunction,
+    WrappedCandidTypeService,
+} from '@jellypack/runtime/lib/wasm/candid';
 import { stringify_factory } from '@jellypack/types/lib/open/open-json';
 import { LinkValue } from '@jellypack/types/lib/values';
 import init, * as wasm from '@jellypack/wasm';
@@ -183,6 +187,35 @@ export const parse_func_candid = async <T>(
         if (debug) {
             console.debug('func candid result mapping: ', value);
         }
+    }
+
+    return value;
+};
+
+export const parse_candid_type_to_text = async <T>(ty: WrappedCandidType, debug: boolean): Promise<T> => {
+    await initializing;
+
+    if (debug) {
+        console.debug('origin type [candid]: ', [ty]);
+    }
+
+    const s = Date.now();
+    let value: any = wasm.parse_candid_type_to_text(JSON.stringify(ty));
+    const e = Date.now();
+    if (debug) console.debug('parse_func_candid wasm spend', e - s, 'ms', [ty]);
+
+    if (debug) {
+        console.debug('func candid result [stringify]: ', [value]);
+    }
+
+    if (value !== undefined) {
+        const result: MotokoResult<string, string> = JSON.parse(value);
+        if (result.err !== undefined) throw new Error(result.err);
+        else value = result.ok;
+    }
+
+    if (debug) {
+        console.debug('func candid result real: ', value);
     }
 
     return value;
