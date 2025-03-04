@@ -18,8 +18,8 @@ importers:
         specifier: ^0.0.2
         version: 0.0.2
       '@jellypack/wasm':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.3
+        version: 0.0.3
       bs58:
         specifier: ^6.0.0
         version: 6.0.0
@@ -418,8 +418,8 @@ packages:
   '@jellypack/types@0.0.2':
     resolution: {integrity: sha512-yXsQStgiDK33alt5kgBAaTI5bya2H9aw35TlXue2J6KpMp5Z9rhg9VILplZm5YbXaQTa8aw5l++G2k2sRxfoDQ==}
 
-  '@jellypack/wasm@0.0.2':
-    resolution: {integrity: sha512-tXP/DbhcjcyfQ67y+o1K0X3sF04VlfZ2Anc26EfUFvIi2T4HLHMyXvdk6LRGoRZc/dRuAGgP85N7b8HcxPMufg==}
+  '@jellypack/wasm@0.0.3':
+    resolution: {integrity: sha512-N3BAK4XROpMtVNO3v3/U8wOGm+h+UTP95tFmN9p3HHkUGqF6Y58rHoVhA5MdAfzjPkKr//zUjKix9U8wJayLDA==}
 
   '@jest/console@29.7.0':
     resolution: {integrity: sha512-5Ni4CU7XHQi32IJ398EEP4RrB8eV09sXP2ROqD4bksHrnTree52PsxvX8tpL8LvTZ3pFzXyPbNQReSN41CAhOg==}
@@ -2498,7 +2498,7 @@ snapshots:
       '@dfinity/principal': 2.3.0
       lodash: 4.17.21
 
-  '@jellypack/wasm@0.0.2': {}
+  '@jellypack/wasm@0.0.3': {}
 
   '@jest/console@29.7.0':
     dependencies:
