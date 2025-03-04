@@ -102,6 +102,24 @@ pub fn parse_func_candid(func: &str) -> String {
     result.into()
 }
 
+/// parse candid type to text
+///
+/// # Arguments
+///
+/// * `ty` - wrapped candid type
+#[wasm_bindgen]
+pub fn parse_candid_type_to_text(ty: &str) -> String {
+    fn inner(ty: &str) -> Result<String, String> {
+        let ty: ic_canister_kit::types::WrappedCandidType =
+            serde_json::from_str(ty).map_err(|err| format!("{:?}", err))?;
+        Ok(ty.to_text())
+    }
+
+    let result = inner(ty);
+    let result: JellyResult = result.into();
+    result.into()
+}
+
 // ===================== check combined =====================
 
 /// find all anchors
@@ -119,7 +137,7 @@ pub fn find_all_anchors(components: &str) -> String {
         let anchors = match jelly_model::model::check::find_all_anchors(&components) {
             Ok(anchors) => anchors,
             Err(err) => {
-                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?)
+                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?);
             }
         };
         serde_json::to_string(&anchors).map_err(|e| format!("stringify anchors failed: {}", e))
@@ -138,8 +156,8 @@ pub fn find_all_anchors(components: &str) -> String {
 /// * `fetch` - check function
 #[wasm_bindgen]
 pub fn find_origin_codes(components: &str, fetch: &str) -> String {
-    use jelly_model::model::types::check::ApisCheckFunction;
     use jelly_model::model::LinkComponent;
+    use jelly_model::model::types::check::ApisCheckFunction;
 
     fn inner(components: &str, fetch: &str) -> Result<String, String> {
         let components: Vec<LinkComponent> =
@@ -149,7 +167,7 @@ pub fn find_origin_codes(components: &str, fetch: &str) -> String {
         let code_items = match jelly_model::model::check::find_origin_codes(&components, &fetch) {
             Ok(code_items) => code_items,
             Err(err) => {
-                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?)
+                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?);
             }
         };
         serde_json::to_string(&code_items).map_err(|e| format!("stringify code_items failed: {}", e))
@@ -174,7 +192,7 @@ pub fn find_template_origin_codes(nodes: &str) -> String {
         let code_items = match jelly_model::model::check::find_template_origin_codes(&nodes) {
             Ok(code_items) => code_items,
             Err(err) => {
-                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?)
+                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?);
             }
         };
         serde_json::to_string(&code_items).map_err(|e| format!("stringify code_items failed: {}", e))
@@ -193,8 +211,8 @@ pub fn find_template_origin_codes(nodes: &str) -> String {
 /// * `fetch` - check function
 #[wasm_bindgen]
 pub fn check(components: &str, fetch: &str) -> String {
-    use jelly_model::model::types::check::ApisCheckFunction;
     use jelly_model::model::LinkComponent;
+    use jelly_model::model::types::check::ApisCheckFunction;
 
     fn inner(components: &str, fetch: &str) -> Result<String, String> {
         let components: Vec<LinkComponent> =
@@ -204,7 +222,7 @@ pub fn check(components: &str, fetch: &str) -> String {
         let checked = match jelly_model::model::check::check(&components, &fetch) {
             Ok(checked) => checked,
             Err(err) => {
-                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?)
+                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?);
             }
         };
         serde_json::to_string(&checked).map_err(|e| format!("stringify checked failed: {}", e))
@@ -236,7 +254,7 @@ pub fn check_template(nodes: &str, checked: &str, fetch: &str) -> String {
         let template = match jelly_model::model::check::check_templates(&nodes, &checked, &fetch) {
             Ok(template) => template,
             Err(err) => {
-                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?)
+                return Err(serde_json::to_string(&err).map_err(|e| format!("stringify link error failed: {}", e))?);
             }
         };
         serde_json::to_string(&template).map_err(|e| format!("stringify template failed: {}", e))
