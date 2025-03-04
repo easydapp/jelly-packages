@@ -38,7 +38,7 @@ export const parse_func_candid: <T>(
     mapping: (func: [string, WrappedCandidTypeFunction]) => T,
     debug: boolean,
 ) => Promise<T> = _parse_func_candid;
-export const parse_candid_type_to_text: <T>(ty: WrappedCandidType, debug: boolean) => Promise<T> =
+export const parse_candid_type_to_text: (ty: WrappedCandidType, debug: boolean) => Promise<string> =
     _parse_candid_type_to_text;
 
 export const find_all_anchors: (components: LinkComponent[], debug: boolean) => Promise<CheckedAnchors> =

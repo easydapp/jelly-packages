@@ -15,8 +15,8 @@ importers:
         specifier: ^0.0.2
         version: 0.0.2
       '@jellypack/wasm-api':
-        specifier: ^0.0.4
-        version: 0.0.4
+        specifier: ^0.0.5
+        version: 0.0.5
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -432,8 +432,8 @@ packages:
   '@jellypack/types@0.0.2':
     resolution: {integrity: sha512-yXsQStgiDK33alt5kgBAaTI5bya2H9aw35TlXue2J6KpMp5Z9rhg9VILplZm5YbXaQTa8aw5l++G2k2sRxfoDQ==}
 
-  '@jellypack/wasm-api@0.0.4':
-    resolution: {integrity: sha512-kTB2f89lYtjJwDPteI3wrgS2Zrwur+BthSNeTRUghAHc3K/ZPLA86qmONlYXd1UNhFsACis1JMMPUaTMunOEaA==}
+  '@jellypack/wasm-api@0.0.5':
+    resolution: {integrity: sha512-XaC7N87p7+PJgk0abJqDp3zF5RLl7dIqAvplF/Px7tc3jDVuPI0enMg8zhfTLZbkcrE/BoFULIEv+NCy7V0SjA==}
 
   '@jellypack/wasm@0.0.2':
     resolution: {integrity: sha512-tXP/DbhcjcyfQ67y+o1K0X3sF04VlfZ2Anc26EfUFvIi2T4HLHMyXvdk6LRGoRZc/dRuAGgP85N7b8HcxPMufg==}
@@ -2445,7 +2445,7 @@ snapshots:
       '@dfinity/principal': 2.3.0
       lodash: 4.17.21
 
-  '@jellypack/wasm-api@0.0.4':
+  '@jellypack/wasm-api@0.0.5':
     dependencies:
       '@choptop/haw': 0.0.13
       '@jellypack/runtime': 0.0.4
