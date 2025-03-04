@@ -192,7 +192,7 @@ export const parse_func_candid = async <T>(
     return value;
 };
 
-export const parse_candid_type_to_text = async <T>(ty: WrappedCandidType, debug: boolean): Promise<T> => {
+export const parse_candid_type_to_text = async (ty: WrappedCandidType, debug: boolean): Promise<string> => {
     await initializing;
 
     if (debug) {
