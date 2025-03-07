@@ -28,4 +28,4 @@ panic = "deny"
 [dependencies]
 boa_engine = "0.20"
 serde = "1.0.218"
-serde_json = "1.0.139"
+serde_json = "1.0.140"
