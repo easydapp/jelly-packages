@@ -224,7 +224,7 @@ const LINTER_CONFIG: Linter.Config = {
         'new-parens': ['error'],
         // 'newline-after-var': ['error'], // ? Style does not check
         // 'newline-before-return': ['error'], // ? Style does not check
-        'newline-per-chained-call': ['error'],
+        // 'newline-per-chained-call': ['error'], // deprecated
         'no-alert': ['error'],
         'no-array-constructor': ['error'],
         'no-async-promise-executor': ['error'],

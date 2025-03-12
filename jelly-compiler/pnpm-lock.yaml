@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@jellypack/types':
-        specifier: 0.0.2
+        specifier: ^0.0.2
         version: 0.0.2
       esbuild-wasm:
         specifier: ^0.25.0
