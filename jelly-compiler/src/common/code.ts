@@ -185,7 +185,7 @@ const LINTER_CONFIG: Linter.Config = {
         'func-names': ['error'],
         'func-style': ['error'],
         // 'function-call-argument-newline': ['error'], // * Not required // Function calls in Xinxing
-        'function-paren-newline': ['error'],
+        // 'function-paren-newline': ['error'], // deprecated
         'generator-star-spacing': ['error'],
         'getter-return': ['error'],
         'global-require': ['error'],
@@ -224,7 +224,7 @@ const LINTER_CONFIG: Linter.Config = {
         'new-parens': ['error'],
         // 'newline-after-var': ['error'], // ? Style does not check
         // 'newline-before-return': ['error'], // ? Style does not check
-        // 'newline-per-chained-call': ['error'], // deprecated
+        'newline-per-chained-call': ['error'],
         'no-alert': ['error'],
         'no-array-constructor': ['error'],
         'no-async-promise-executor': ['error'],
