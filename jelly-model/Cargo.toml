@@ -51,5 +51,5 @@ sha2 = "0.10"
 
 wasm-bindgen = { version = "0.2.100", optional = true }
 
-ic-canister-kit = { version = "1.0.19", features = ["canister-did"] }
+ic-canister-kit = { version = "1.0.20", features = ["canister-did"] }
 jelly-executor = { path = "../jelly-executor", optional = true }
