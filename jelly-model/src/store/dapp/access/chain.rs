@@ -18,17 +18,24 @@ pub enum Chain {
     #[serde(rename = "ethereum-test-sepolia")]
     EthereumTestnetSepolia,
 
-    /// polygon
-    #[serde(rename = "polygon")]
-    Polygon,
-    /// polygon test
-    #[serde(rename = "polygon-test-amoy")]
-    PolygonTestnetAmoy,
-
     /// bsc
     #[serde(rename = "bsc")]
     BinanceSmartChain,
     /// bsc test
     #[serde(rename = "bsc-test")]
     BinanceSmartChainTestnet,
+
+    /// hsk
+    #[serde(rename = "hsk")]
+    HashKeyChain,
+    /// hsk test
+    #[serde(rename = "hsk-test")]
+    HashKeyChainTestnet,
+
+    /// polygon
+    #[serde(rename = "polygon")]
+    Polygon,
+    /// polygon test
+    #[serde(rename = "polygon-test-amoy")]
+    PolygonTestnetAmoy,
 }

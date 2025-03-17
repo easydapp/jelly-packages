@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@jellypack/types':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.9
+        version: 0.0.9
       esbuild-wasm:
         specifier: ^0.25.1
         version: 0.25.1
@@ -369,8 +369,8 @@ packages:
     resolution: {integrity: sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==}
     engines: {node: '>=8'}
 
-  '@jellypack/types@0.0.2':
-    resolution: {integrity: sha512-yXsQStgiDK33alt5kgBAaTI5bya2H9aw35TlXue2J6KpMp5Z9rhg9VILplZm5YbXaQTa8aw5l++G2k2sRxfoDQ==}
+  '@jellypack/types@0.0.9':
+    resolution: {integrity: sha512-FW0S0yMRcR+WAReesGxu2H747EOp5wF02wh2HqOSwZmbUP2u95L3+BeJqb34ov/FHHIrH/FvKqd+0b15kO/oqw==}
 
   '@jest/console@29.7.0':
     resolution: {integrity: sha512-5Ni4CU7XHQi32IJ398EEP4RrB8eV09sXP2ROqD4bksHrnTree52PsxvX8tpL8LvTZ3pFzXyPbNQReSN41CAhOg==}
@@ -507,28 +507,24 @@ packages:
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-arm64-musl@1.7.23':
     resolution: {integrity: sha512-JEdtwdthazKq4PBz53KSubwwK8MvqODAihGSAzc8u3Unq4ojcvaS8b0CwLBeD+kTQ78HpxOXTt3DsFIxpgaCAA==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-linux-x64-gnu@1.7.23':
     resolution: {integrity: sha512-V51gFPWaVAHbI1yg9ahsoya3aB4uawye3SZ5uQWgcP7wdCdiv60dw4F5nuPJf5Z1oXD3U/BslXuamv8Oh9vXqQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@swc/core-linux-x64-musl@1.7.23':
     resolution: {integrity: sha512-BBqQi4+UdeRqag3yM4IJjaHG4yc1o3l9ksENHToE0o/u2DT0FY5+K/DiYGZLC1JHbSFzNqRCYsa7DIzRtZ0A1A==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@swc/core-win32-arm64-msvc@1.7.23':
     resolution: {integrity: sha512-JPk6pvCKncL6bXG7p+NLZf8PWx4FakVvKNdwGeMrYunb+yk1IZf7qf9LJk8+GDGF5QviDXPs8opZrTrfsW80fA==}
@@ -2379,7 +2375,7 @@ snapshots:
 
   '@istanbuljs/schema@0.1.3': {}
 
-  '@jellypack/types@0.0.2':
+  '@jellypack/types@0.0.9':
     dependencies:
       '@dfinity/principal': 2.3.0
       lodash: 4.17.21

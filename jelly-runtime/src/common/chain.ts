@@ -4,9 +4,12 @@ export type CallChain =
     // ethereum
     | 'ethereum'
     | 'ethereum-test-sepolia'
-    // polygon
-    | 'polygon'
-    | 'polygon-test-amoy'
     // bsc
     | 'bsc'
-    | 'bsc-test';
+    | 'bsc-test'
+    // hsk
+    | 'hsk'
+    | 'hsk-test'
+    // polygon
+    | 'polygon'
+    | 'polygon-test-amoy';

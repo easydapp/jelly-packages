@@ -12,19 +12,26 @@ pub enum EvmChain {
     #[serde(rename = "ethereum-test-sepolia")]
     EthereumTestnetSepolia, // chain id -> 11155111
 
-    /// Polygon
-    #[serde(rename = "polygon")]
-    Polygon, // chain id -> 137
-    /// Polygon test
-    #[serde(rename = "polygon-test-amoy")]
-    PolygonTestnetAmoy, // chain id -> 80002
-
     /// BSC
     #[serde(rename = "bsc")]
     BinanceSmartChain, // chain id -> 56
     /// BSC test
     #[serde(rename = "bsc-test")]
     BinanceSmartChainTestnet, // chain id -> 97
+
+    /// HashKey
+    #[serde(rename = "hsk")]
+    HashKeyChain, // chain id -> 177
+    /// HashKey test
+    #[serde(rename = "hsk-test")]
+    HashKeyChainTestnet, // chain id -> 133
+
+    /// Polygon
+    #[serde(rename = "polygon")]
+    Polygon, // chain id -> 137
+    /// Polygon test
+    #[serde(rename = "polygon-test-amoy")]
+    PolygonTestnetAmoy, // chain id -> 80002
 }
 
 impl EvmChain {
@@ -33,10 +40,12 @@ impl EvmChain {
         match &self {
             EvmChain::Ethereum => CallChain::Ethereum,
             EvmChain::EthereumTestnetSepolia => CallChain::EthereumTestnetSepolia,
-            EvmChain::Polygon => CallChain::Polygon,
-            EvmChain::PolygonTestnetAmoy => CallChain::PolygonTestnetAmoy,
             EvmChain::BinanceSmartChain => CallChain::BinanceSmartChain,
             EvmChain::BinanceSmartChainTestnet => CallChain::BinanceSmartChainTestnet,
+            EvmChain::HashKeyChain => CallChain::HashKeyChain,
+            EvmChain::HashKeyChainTestnet => CallChain::HashKeyChainTestnet,
+            EvmChain::Polygon => CallChain::Polygon,
+            EvmChain::PolygonTestnetAmoy => CallChain::PolygonTestnetAmoy,
         }
     }
 }

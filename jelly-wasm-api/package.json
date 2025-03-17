@@ -1,6 +1,6 @@
 {
     "name": "@jellypack/wasm-api",
-    "version": "0.0.7",
+    "version": "0.0.9",
     "private": false,
     "description": "",
     "author": "",
@@ -25,9 +25,9 @@
     },
     "dependencies": {
         "@choptop/haw": "^0.0.13",
-        "@jellypack/runtime": "^0.0.4",
-        "@jellypack/types": "^0.0.2",
-        "@jellypack/wasm": "^0.0.4",
+        "@jellypack/runtime": "^0.0.9",
+        "@jellypack/types": "^0.0.9",
+        "@jellypack/wasm": "^0.0.9",
         "bs58": "^6.0.0",
         "ethers": "^6.13.5",
         "lodash": "^4.17.21",
