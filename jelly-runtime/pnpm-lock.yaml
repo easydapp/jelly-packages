@@ -27,8 +27,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       '@jellypack/types':
-        specifier: ^0.0.9
-        version: 0.0.9
+        specifier: ^0.0.10
+        version: 0.0.10
       bs58:
         specifier: ^6.0.0
         version: 6.0.0
@@ -405,8 +405,8 @@ packages:
     resolution: {integrity: sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==}
     engines: {node: '>=8'}
 
-  '@jellypack/types@0.0.9':
-    resolution: {integrity: sha512-FW0S0yMRcR+WAReesGxu2H747EOp5wF02wh2HqOSwZmbUP2u95L3+BeJqb34ov/FHHIrH/FvKqd+0b15kO/oqw==}
+  '@jellypack/types@0.0.10':
+    resolution: {integrity: sha512-BxmBwxFluYf7cEwCsSnN0oYeQ1BvxsZxEeu+hqdI75f3Qo9oyAa4KktN7Qyd4qepR/c4vtxX6XchfvniqBWWew==}
 
   '@jest/console@29.7.0':
     resolution: {integrity: sha512-5Ni4CU7XHQi32IJ398EEP4RrB8eV09sXP2ROqD4bksHrnTree52PsxvX8tpL8LvTZ3pFzXyPbNQReSN41CAhOg==}
@@ -2491,7 +2491,7 @@ snapshots:
 
   '@istanbuljs/schema@0.1.3': {}
 
-  '@jellypack/types@0.0.9':
+  '@jellypack/types@0.0.10':
     dependencies:
       '@dfinity/principal': 2.3.0
       lodash: 4.17.21
