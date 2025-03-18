@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@jellypack/runtime':
-        specifier: ^0.0.11
-        version: 0.0.11
+        specifier: ^0.0.12
+        version: 0.0.12
       '@jellypack/types':
-        specifier: ^0.0.11
-        version: 0.0.11
+        specifier: ^0.0.12
+        version: 0.0.12
       '@jellypack/wasm-api':
-        specifier: ^0.0.11
-        version: 0.0.11
+        specifier: ^0.0.12
+        version: 0.0.12
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -426,17 +426,17 @@ packages:
       '@vue/compiler-sfc':
         optional: true
 
-  '@jellypack/runtime@0.0.11':
-    resolution: {integrity: sha512-mTo2MsIcVssmFHa5LKg0jnfp4QHvIym0lahi9HpY4fuc3+Ql6rxFxjHhn/F3dI27VwMnoZjg3NWB02uvDfzmnA==}
+  '@jellypack/runtime@0.0.12':
+    resolution: {integrity: sha512-VWKx4Kz6t+9fiKRsMlcV0YtKw8N7PDOVe+M058LayzJOYcTOEl5RfQOOkMI0m8B77pIkTO+lrBxgvFfw2jd8CA==}
 
-  '@jellypack/types@0.0.11':
-    resolution: {integrity: sha512-sJuiM7YeoNQXIAdtz33f9gRBH5iormhcNqjhY44RKi9oM4f/XZUvWsHFeSUIzmJ1efZ7ozsI4YVY1MukK/DYew==}
+  '@jellypack/types@0.0.12':
+    resolution: {integrity: sha512-ZMylfMlGO64U7UWG5lSmQPJqT7e907bChPMcwrSYl1U+S87Fvt6eFDwxCDIwuhK6fssfGsK3x79VjsIyLDwyQw==}
 
-  '@jellypack/wasm-api@0.0.11':
-    resolution: {integrity: sha512-Byfnfnd1fOLRY2u7DVLcjHKe7xXSyME3tfgCcrvFr583WUe/lMfnd1q9R0jRXDisYsZhtq/tL5Maa+WveqoGVA==}
+  '@jellypack/wasm-api@0.0.12':
+    resolution: {integrity: sha512-WMVo53Ozdc1PAl1+noyl4Wfd6on3G0Emuloe8DpQ+7GL2BogL+7Xsr/2MJv9dSt+9zv/G1fEMXgDEhCFu+xxWA==}
 
-  '@jellypack/wasm@0.0.11':
-    resolution: {integrity: sha512-otvRzKZFxEv4ug88zJfqqJWj0Q49623G5GZ/++Qqmfj4OH2dHzFvGkXp3FY5DXi86pwMl71P7YZgeBb9t0I76Q==}
+  '@jellypack/wasm@0.0.12':
+    resolution: {integrity: sha512-yd8bRJuQ1OE+LI8pS5HCcBPsme3DXyLgju2LdnZC8U3qyMxfwizLkLVAAeszXJotkGd4R9dZyxXmdKR0W7yQNQ==}
 
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
@@ -2423,7 +2423,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@jellypack/runtime@0.0.11':
+  '@jellypack/runtime@0.0.12':
     dependencies:
       '@aws-crypto/sha256-js': 5.2.0
       '@choptop/haw': 0.0.13
@@ -2431,7 +2431,7 @@ snapshots:
       '@dfinity/candid': 2.3.0(@dfinity/principal@2.3.0)
       '@dfinity/identity': 2.3.0(@dfinity/agent@2.3.0(@dfinity/candid@2.3.0(@dfinity/principal@2.3.0))(@dfinity/principal@2.3.0))(@dfinity/principal@2.3.0)
       '@dfinity/principal': 2.3.0
-      '@jellypack/types': 0.0.11
+      '@jellypack/types': 0.0.12
       bs58: 6.0.0
       ethers: 6.13.5
       lodash: 4.17.21
@@ -2440,17 +2440,17 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@jellypack/types@0.0.11':
+  '@jellypack/types@0.0.12':
     dependencies:
       '@dfinity/principal': 2.3.0
       lodash: 4.17.21
 
-  '@jellypack/wasm-api@0.0.11':
+  '@jellypack/wasm-api@0.0.12':
     dependencies:
       '@choptop/haw': 0.0.13
-      '@jellypack/runtime': 0.0.11
-      '@jellypack/types': 0.0.11
-      '@jellypack/wasm': 0.0.11
+      '@jellypack/runtime': 0.0.12
+      '@jellypack/types': 0.0.12
+      '@jellypack/wasm': 0.0.12
       bs58: 6.0.0
       ethers: 6.13.5
       lodash: 4.17.21
@@ -2459,7 +2459,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@jellypack/wasm@0.0.11': {}
+  '@jellypack/wasm@0.0.12': {}
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
