@@ -71,7 +71,7 @@ export const call_evm_call_action = async (
     const api = check_evm_api(self.api, apis);
 
     // 3. parse api
-    const item = check_evm_abi_item(api);
+    const item = check_evm_abi_item(api, true);
 
     // 4. build actor
     const actor = new ethers.Contract(contract, [item], identity_metadata.provider);
