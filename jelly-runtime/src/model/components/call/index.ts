@@ -10,7 +10,7 @@ import { CodeExecutor, ParseFuncCandid, ParseServiceCandid } from '../../../wasm
 import { ComponentCallTrigger } from '../../common/call_trigger';
 import { ComponentId } from '../../common/identity';
 import { AllEndpoints, Endpoint } from '../../common/lets';
-import { ComponentIdentityValue } from '../identity';
+import { ComponentIdentityValue, PlainComponentIdentityValue } from '../identity';
 import { call_evm_metadata_get_used_component, CallEvmMetadata, get_call_evm_value } from './evm';
 import { ExecuteEvmActionCall } from './evm/action/call';
 import { ExecuteEvmActionDeploy } from './evm/action/deploy';
@@ -92,9 +92,16 @@ export const component_call_get_identity = (self: ComponentCall): ComponentId | 
 export const get_identity_value_by_id = async <T>(
     id: ComponentId,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
 ): Promise<T | undefined> => {
+    let fetched: PlainComponentIdentityValue | undefined = identity_fetched[id];
+    if (fetched) return fetched as T;
     const value = identity[id];
-    if (typeof value === 'function') return (await value()) as T;
+    if (typeof value === 'function') {
+        fetched = await value();
+        if (fetched) identity_fetched[id] = fetched;
+        return fetched as T;
+    }
     console.debug('get_identity_value_by_id', id, value);
     return value as T;
 };
@@ -105,6 +112,7 @@ export const get_call_value = async (
     trigger: ComponentId | undefined,
     identity_triggered: Record<ComponentId, boolean>,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
     runtime_values: RuntimeValues,
     apis: Record<ApiDataAnchor, ApiData>,
     codes: Record<CodeDataAnchor, CodeData>,
@@ -129,6 +137,7 @@ export const get_call_value = async (
                 trigger,
                 identity_triggered,
                 identity,
+                identity_fetched,
                 runtime_values,
                 codes,
                 calling,
@@ -144,6 +153,7 @@ export const get_call_value = async (
                 trigger,
                 identity_triggered,
                 identity,
+                identity_fetched,
                 runtime_values,
                 codes,
                 apis,
@@ -162,6 +172,7 @@ export const get_call_value = async (
                 trigger,
                 identity_triggered,
                 identity,
+                identity_fetched,
                 runtime_values,
                 codes,
                 apis,

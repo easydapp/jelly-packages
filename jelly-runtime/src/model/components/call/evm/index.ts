@@ -12,7 +12,7 @@ import {
 import { ComponentId } from '../../../common/identity';
 import { AllEndpoints } from '../../../common/lets';
 import { EvmChain } from '../../../types/evm';
-import { ComponentIdentityValue } from '../../identity';
+import { ComponentIdentityValue, PlainComponentIdentityValue } from '../../identity';
 import { ComponentIdentityEvmValue, identity_evm_metadata_get_anonymous_value } from '../../identity/evm';
 import { call_evm_action, evm_action_get_used_component, EvmAction, match_evm_action } from './action';
 import { ExecuteEvmActionCall } from './action/call';
@@ -42,6 +42,7 @@ export const get_call_evm_value = async (
     trigger: ComponentId | undefined,
     identity_triggered: Record<ComponentId, boolean>,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
     runtime_values: RuntimeValues,
     codes: Record<CodeDataAnchor, CodeData>,
     apis: Record<ApiDataAnchor, ApiData>,
@@ -69,8 +70,10 @@ export const get_call_evm_value = async (
     if (alive === undefined) return undefined;
 
     // 1. identity
-    if (identity_triggered[self.identity ?? id]) return undefined; // do not trigger again this time
-    identity_triggered[self.identity ?? id] = true;
+    if (self.identity !== undefined) {
+        if (!identity_fetched[self.identity] && identity_triggered[self.identity]) return undefined; // do not trigger again this time
+        identity_triggered[self.identity] = true;
+    }
 
     calling.set_connecting(true); // ! Identity link
     let identity_metadata: ComponentIdentityEvmValue | undefined;
@@ -78,7 +81,13 @@ export const get_call_evm_value = async (
         identity_metadata =
             self.identity === undefined
                 ? identity_evm_metadata_get_anonymous_value(self.chain)
-                : (await get_identity_value_by_id<{ evm: ComponentIdentityEvmValue }>(self.identity, identity))?.evm;
+                : (
+                      await get_identity_value_by_id<{ evm: ComponentIdentityEvmValue }>(
+                          self.identity,
+                          identity,
+                          identity_fetched,
+                      )
+                  )?.evm;
     } finally {
         calling.set_connecting(false); // ! Identity link
     }

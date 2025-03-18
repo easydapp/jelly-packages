@@ -42,6 +42,7 @@ import {
     component_identity_has_value,
     ComponentIdentity,
     ComponentIdentityValue,
+    PlainComponentIdentityValue,
 } from '../model/components/identity';
 import { ApiData, ApiDataAnchor } from '../store/api';
 import { CodeData, CodeDataAnchor } from '../store/code';
@@ -62,6 +63,7 @@ export class CombinedRuntime {
     combined_links: ComponentId[]; // all component id
     param: Record<string, string>; // query parameter
     identity: Record<ComponentId, ComponentIdentityValue>; // Preset identity
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>; // fetched identity
     codes: Record<CodeDataAnchor, CodeData>; // stored code
     apis: Record<ApiDataAnchor, ApiData>; // stored API
     combines: Record<CombinedAnchor, Combined>; // stored combined
@@ -130,6 +132,7 @@ export class CombinedRuntime {
         this.combined_links = [];
         this.param = param;
         this.identity = identity;
+        this.identity_fetched = {};
         this.codes = codes;
         this.apis = apis;
         this.combines = combines;
@@ -445,6 +448,7 @@ export class CombinedRuntime {
                         const value = await component_identity_get_output_value(
                             identity,
                             this.identity,
+                            this.identity_fetched,
                             (id: ComponentId, connecting: boolean) => this.connect(id, connecting),
                         );
                         this.call(); // Notification status column
@@ -471,6 +475,7 @@ export class CombinedRuntime {
                             trigger,
                             identity_triggered,
                             this.identity,
+                            this.identity_fetched,
                             this.runtime_values,
                             this.apis,
                             this.codes,

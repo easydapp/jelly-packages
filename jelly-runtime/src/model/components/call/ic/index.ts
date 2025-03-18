@@ -13,7 +13,7 @@ import {
 } from '../../../common/call_trigger';
 import { ComponentId } from '../../../common/identity';
 import { AllEndpoints } from '../../../common/lets';
-import { ComponentIdentityValue } from '../../identity';
+import { ComponentIdentityValue, PlainComponentIdentityValue } from '../../identity';
 import { ComponentIdentityIcValue, identity_ic_metadata_get_anonymous_value } from '../../identity/ic';
 import { call_ic_action, ic_action_get_used_component, IcAction } from './action';
 import { ExecuteIcActionCall } from './action/call';
@@ -39,6 +39,7 @@ export const get_call_ic_value = async (
     trigger: ComponentId | undefined,
     identity_triggered: Record<ComponentId, boolean>,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
     runtime_values: RuntimeValues,
     codes: Record<CodeDataAnchor, CodeData>,
     apis: Record<ApiDataAnchor, ApiData>,
@@ -57,8 +58,10 @@ export const get_call_ic_value = async (
     if (alive === undefined) return undefined;
 
     // 1. identity
-    if (identity_triggered[self.identity ?? id]) return undefined; // do not trigger again this time
-    identity_triggered[self.identity ?? id] = true;
+    if (self.identity !== undefined) {
+        if (!identity_fetched[self.identity] && identity_triggered[self.identity]) return undefined; // do not trigger again this time
+        identity_triggered[self.identity] = true;
+    }
 
     calling.set_connecting(true); // ! Identity link
     let identity_metadata: ComponentIdentityIcValue | undefined;
@@ -66,7 +69,13 @@ export const get_call_ic_value = async (
         identity_metadata =
             self.identity === undefined
                 ? identity_ic_metadata_get_anonymous_value()
-                : (await get_identity_value_by_id<{ ic: ComponentIdentityIcValue }>(self.identity, identity))?.ic;
+                : (
+                      await get_identity_value_by_id<{ ic: ComponentIdentityIcValue }>(
+                          self.identity,
+                          identity,
+                          identity_fetched,
+                      )
+                  )?.ic;
     } finally {
         calling.set_connecting(false); // ! Identity link
     }

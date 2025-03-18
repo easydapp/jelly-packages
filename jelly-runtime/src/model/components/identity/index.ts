@@ -117,12 +117,13 @@ type IdentityOutput = IdentityHttpOutput | IdentityIcOutput | IdentityEvmOutput;
 export const component_identity_get_output_value = async (
     self: ComponentIdentity,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
     connecting: (id: ComponentId, connecting: boolean) => void,
 ): Promise<IdentityOutput | undefined> => {
     return await match_identity_inner_metadata_async<IdentityOutput | undefined>(self.metadata.metadata, {
         http: async (http) => identity_http_metadata_get_value(http),
-        ic: async (ic) => await identity_ic_metadata_get_value(ic, self.id, identity, connecting),
-        evm: async (evm) => await identity_evm_metadata_get_value(evm, self.id, identity, connecting),
+        ic: async (ic) => await identity_ic_metadata_get_value(ic, self.id, identity, identity_fetched, connecting),
+        evm: async (evm) => await identity_evm_metadata_get_value(evm, self.id, identity, identity_fetched, connecting),
     });
 };
 

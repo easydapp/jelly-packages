@@ -18,7 +18,7 @@ import {
     named_value_get_used_component,
     NamedValue,
 } from '../../../common/refer';
-import { ComponentIdentityValue } from '../../identity';
+import { ComponentIdentityValue, PlainComponentIdentityValue } from '../../identity';
 import { identity_http_metadata_get_anonymous_value, IdentityHttpOutput } from '../../identity/http';
 import { get_http_body_value, http_body_get_used_component, HttpBody } from './body';
 import { get_http_headers_value } from './headers';
@@ -64,6 +64,7 @@ export const get_call_http_value = async (
     trigger: ComponentId | undefined,
     identity_triggered: Record<ComponentId, boolean>,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
     runtime_values: RuntimeValues,
     codes: Record<CodeDataAnchor, CodeData>,
     calling: CallingData,
@@ -79,7 +80,9 @@ export const get_call_http_value = async (
     if (alive === undefined) return undefined;
 
     // 1. identity
-    identity_triggered[self.identity ?? id] = true;
+    if (self.identity !== undefined) {
+        identity_triggered[self.identity] = true;
+    }
 
     calling.set_connecting(true); // ! Identity link
     let identity_metadata: IdentityHttpOutput | undefined;
@@ -90,7 +93,7 @@ export const get_call_http_value = async (
                 : (
                       await get_identity_value_by_id<{
                           http: IdentityHttpOutput;
-                      }>(self.identity, identity)
+                      }>(self.identity, identity, identity_fetched)
                   )?.http;
     } finally {
         calling.set_connecting(false); // ! Identity link

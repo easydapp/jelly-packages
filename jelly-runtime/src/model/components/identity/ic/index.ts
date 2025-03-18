@@ -74,6 +74,7 @@ export const identity_ic_metadata_get_value = async (
     self: IdentityIcMetadata,
     id: ComponentId,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
     connecting: (id: ComponentId, connecting: boolean) => void,
 ): Promise<IdentityIcOutput | undefined> => {
     let value: PlainComponentIdentityValue | undefined;
@@ -97,6 +98,7 @@ export const identity_ic_metadata_get_value = async (
     if (value === undefined) return undefined;
     if ('ic' in value) {
         identity[id] = value;
+        identity_fetched[id] = value;
         return {
             wallet: Object.keys(value.ic.wallet)[0],
             owner: value.ic.owner,

@@ -85,6 +85,7 @@ export const identity_evm_metadata_get_value = async (
     self: IdentityEvmMetadata,
     id: ComponentId,
     identity: Record<ComponentId, ComponentIdentityValue>,
+    identity_fetched: Record<ComponentId, PlainComponentIdentityValue>,
     connecting: (id: ComponentId, connecting: boolean) => void,
 ): Promise<IdentityEvmOutput | undefined> => {
     let value: PlainComponentIdentityValue | undefined;
@@ -108,6 +109,7 @@ export const identity_evm_metadata_get_value = async (
     if (value === undefined) return undefined;
     if ('evm' in value) {
         identity[id] = value;
+        identity_fetched[id] = value;
         return {
             chain: value.evm.chain,
             chain_id: value.evm.chain_id,
