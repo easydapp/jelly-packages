@@ -5,7 +5,14 @@ export const check_evm_abi_item = (api: EvmApi, call: boolean): AbiItem => {
     return match_evm_api<AbiItem>(api, {
         single: (single) => JSON.parse(single.api),
         origin: (origin) => {
-            const items: AbiItem[] = (call ? filter_call_methods : filter_transaction_methods)(JSON.parse(origin.abi));
+            let items: AbiItem[] = JSON.parse(origin.abi);
+
+            // try match name
+            const found = items.filter((item) => item.name === origin.name);
+            if (found.length === 1) return found[0];
+
+            // use index
+            items = (call ? filter_call_methods : filter_transaction_methods)(items);
             const item =
                 origin.index !== undefined ? items[origin.index] : items.find((item) => item.name === origin.name);
             if (!item) throw new Error('can not find function');
