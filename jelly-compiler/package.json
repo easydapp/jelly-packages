@@ -1,6 +1,6 @@
 {
     "name": "@jellypack/compiler",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "private": false,
     "description": "",
     "author": "",
@@ -24,7 +24,7 @@
         "postversion": "git push && git push --tags"
     },
     "dependencies": {
-        "@jellypack/types": "^0.0.12",
+        "@jellypack/types": "^0.0.13",
         "esbuild-wasm": "^0.25.1",
         "eslint-linter-browserify": "^9.22.0",
         "lodash": "^4.17.21"

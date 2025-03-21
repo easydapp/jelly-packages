@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# search version.*"0\.0\. and change those 8 package version to next
-# search jellypack.*0\.0\. and change all deps to next version
+# search version.*"0\.0\. and change those 8 package version to next [8]
+# search jellypack.*0\.0\. and change all deps to next version [4]
 
 echo "========= 1. jelly-types ========="
 cd jelly-types
