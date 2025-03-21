@@ -6,21 +6,21 @@ use serde::{Deserialize, Serialize};
 use crate::{
     model::{
         common::{
-            error::{system_error, LinkError},
+            error::{LinkError, system_error},
             identity::ComponentId,
         },
         types::{
-            abi::types::{AbiItem, AbiType},
+            abi::types::{AbiItem, AbiStateMutability, AbiType},
             check::CheckFunction,
         },
     },
     store::api::{
+        ApiData,
         anchor::{ApiDataAnchor, ApiDataParsedId},
         content::{
-            evm::{EvmApi, OriginEvmApi, SingleEvmApi},
             ApiDataContent,
+            evm::{EvmApi, OriginEvmApi, SingleEvmApi},
         },
-        ApiData,
     },
 };
 
@@ -51,7 +51,12 @@ impl EvmCallApi {
     }
 
     /// Query parameters and output
-    pub fn get_data_and_output<F: CheckFunction>(&self, from: ComponentId, fetch: &F) -> Result<AbiItem, LinkError> {
+    pub fn get_data_and_output<F: CheckFunction>(
+        &self,
+        from: ComponentId,
+        call: bool,
+        fetch: &F,
+    ) -> Result<AbiItem, LinkError> {
         let api = match self {
             Self::Api(api) => Cow::Borrowed(api),
             Self::Anchor(anchor) => {
@@ -65,7 +70,7 @@ impl EvmCallApi {
                 }
             }
         };
-        api.get_data_and_output(from, fetch)
+        api.get_data_and_output(from, call, fetch)
     }
 
     /// check api
@@ -129,7 +134,12 @@ impl EvmApi {
     // 3. Multi-parameter ->
     //  RET CODE parameter is this type [any*, any*, ..] -> output
     //  RET REFER split results combine output [any*, any*, ..] -> output
-    pub fn get_data_and_output<F: CheckFunction>(&self, from: ComponentId, fetch: &F) -> Result<AbiItem, LinkError> {
+    pub fn get_data_and_output<F: CheckFunction>(
+        &self,
+        from: ComponentId,
+        call: bool,
+        fetch: &F,
+    ) -> Result<AbiItem, LinkError> {
         let func = match self {
             Self::Single(SingleEvmApi { api }) => {
                 let func: AbiItem = serde_json::from_str(api)
@@ -142,25 +152,36 @@ impl EvmApi {
                     .fetch_origin_api(abi)
                     .map_err(|error| system_error(format!("fetch origin api failed: {error}")))?;
                 let functions: Vec<AbiItem> = serde_json::from_str(abi)
-                    .map(|functions: Vec<AbiItem>| {
-                        functions
-                            .into_iter()
-                            .filter(|func| {
-                                func.name.is_some()
-                                    && matches!(func.ty, AbiType::Function)
-                                    && func.state_mutability.is_some()
-                            })
-                            .collect()
-                    })
                     .map_err(|e| LinkError::InvalidCallEvmActionApi((from, format!("parse abi failed: {e}")).into()))?;
 
-                let mut func = index.as_ref().and_then(|index| functions.get(*index as usize).cloned());
-                if func.is_none() {
-                    func = functions
-                        .into_iter()
-                        .find(|f| f.name.as_ref().is_some_and(|n| n == name));
+                // ! try match name
+                let found = functions
+                    .iter()
+                    .filter(|item| item.name.as_ref().is_some_and(|n| n == name))
+                    .collect::<Vec<_>>();
+                if found.len() == 1 {
+                    // ! must be unique
+                    found.first().map(|&item| item.to_owned()).ok_or_else(|| {
+                        LinkError::InvalidCallEvmActionApi((from, "name or index not found".into()).into())
+                    })?
+                } else {
+                    // ! use index
+                    let functions = if call {
+                        filter_call_methods(functions)
+                    } else {
+                        filter_transaction_methods(functions)
+                    };
+
+                    let mut func = index.as_ref().and_then(|index| functions.get(*index as usize).cloned());
+                    if func.is_none() {
+                        func = functions
+                            .into_iter()
+                            .find(|f| f.name.as_ref().is_some_and(|n| n == name));
+                    }
+                    func.ok_or_else(|| {
+                        LinkError::InvalidCallEvmActionApi((from, "name or index not found".into()).into())
+                    })?
                 }
-                func.ok_or_else(|| LinkError::InvalidCallEvmActionApi((from, "name or index not found".into()).into()))?
             }
         };
 
@@ -176,4 +197,37 @@ impl EvmApi {
 
         Ok(func)
     }
+}
+
+fn filter_call_methods(items: Vec<AbiItem>) -> Vec<AbiItem> {
+    items
+        .into_iter()
+        .filter(|item| {
+            item.name.is_some()
+                && matches!(item.ty, AbiType::Function)
+                && item.state_mutability.as_ref().is_some_and(|sm| {
+                    matches!(
+                        sm,
+                        AbiStateMutability::Pure
+                            | AbiStateMutability::View
+                            | AbiStateMutability::Nonpayable
+                            | AbiStateMutability::Payable
+                    )
+                })
+        })
+        .collect::<Vec<_>>()
+}
+
+fn filter_transaction_methods(items: Vec<AbiItem>) -> Vec<AbiItem> {
+    items
+        .into_iter()
+        .filter(|item| {
+            item.name.is_some()
+                && matches!(item.ty, AbiType::Function)
+                && item
+                    .state_mutability
+                    .as_ref()
+                    .is_some_and(|sm| matches!(sm, |AbiStateMutability::Nonpayable| AbiStateMutability::Payable))
+        })
+        .collect::<Vec<_>>()
 }

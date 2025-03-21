@@ -82,7 +82,7 @@ impl EvmActionTransaction {
     ) -> Result<Vec<CheckedCodeItem>, LinkError> {
         let mut codes = Vec::new();
 
-        let func = self.api.get_data_and_output(from, fetch)?;
+        let func = self.api.get_data_and_output(from, false, fetch)?;
 
         let api_data = abi_params_to_typescript(&func.inputs.unwrap_or_default(), from)?;
         // let api_output = abi_params_to_typescript(&func.outputs.unwrap_or_default(), from)?;
@@ -146,7 +146,7 @@ impl EvmActionTransaction {
             nonce = Some(nonce_ref.check_nonce(endpoints, from)?);
         }
 
-        let func = self.api.get_data_and_output(from, fetch)?;
+        let func = self.api.get_data_and_output(from, false, fetch)?;
         let inputs = func.inputs.unwrap_or_default();
         // let outputs = func.outputs.unwrap_or_default();
         let state_mutability = func.state_mutability.ok_or_else(|| {

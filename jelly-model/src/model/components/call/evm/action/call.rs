@@ -80,7 +80,7 @@ impl EvmActionCall {
     ) -> Result<Vec<CheckedCodeItem>, LinkError> {
         let mut codes = Vec::new();
 
-        let func = self.api.get_data_and_output(from, fetch)?;
+        let func = self.api.get_data_and_output(from, true, fetch)?;
 
         let api_data = abi_params_to_typescript(&func.inputs.unwrap_or_default(), from)?;
         let api_output = abi_params_to_typescript(&func.outputs.unwrap_or_default(), from)?;
@@ -119,7 +119,7 @@ impl EvmActionCall {
         // 1. check contract
         let contract = self.contract.check_contract(endpoints, from)?;
 
-        let func = self.api.get_data_and_output(from, fetch)?;
+        let func = self.api.get_data_and_output(from, true, fetch)?;
         let inputs = func.inputs.unwrap_or_default();
         let outputs = func.outputs.unwrap_or_default();
         let _state_mutability = func.state_mutability.ok_or_else(|| {

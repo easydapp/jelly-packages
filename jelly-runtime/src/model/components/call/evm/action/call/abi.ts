@@ -7,11 +7,11 @@ export const check_evm_abi_item = (api: EvmApi, call: boolean): AbiItem => {
         origin: (origin) => {
             let items: AbiItem[] = JSON.parse(origin.abi);
 
-            // try match name
+            // ! try match name
             const found = items.filter((item) => item.name === origin.name);
-            if (found.length === 1) return found[0];
+            if (found.length === 1) return found[0]; // ! must be unique
 
-            // use index
+            // ! use index
             items = (call ? filter_call_methods : filter_transaction_methods)(items);
             const item =
                 origin.index !== undefined ? items[origin.index] : items.find((item) => item.name === origin.name);
