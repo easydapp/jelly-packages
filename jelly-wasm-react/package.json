@@ -1,6 +1,6 @@
 {
     "name": "@jellypack/wasm-react",
-    "version": "0.0.13",
+    "version": "0.0.15",
     "private": false,
     "description": "",
     "author": "",
@@ -20,9 +20,9 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@jellypack/runtime": "^0.0.13",
-        "@jellypack/types": "^0.0.13",
-        "@jellypack/wasm-api": "^0.0.13",
+        "@jellypack/runtime": "^0.0.15",
+        "@jellypack/types": "^0.0.15",
+        "@jellypack/wasm-api": "^0.0.15",
         "buffer": "^6.0.3",
         "lodash": "^4.17.21"
     },

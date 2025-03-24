@@ -1,6 +1,6 @@
 {
     "name": "@jellypack/runtime",
-    "version": "0.0.13",
+    "version": "0.0.15",
     "private": false,
     "description": "",
     "author": "",
@@ -30,7 +30,7 @@
         "@dfinity/candid": "^2.3.0",
         "@dfinity/identity": "^2.3.0",
         "@dfinity/principal": "^2.3.0",
-        "@jellypack/types": "^0.0.13",
+        "@jellypack/types": "^0.0.15",
         "bs58": "^6.0.0",
         "ethers": "^6.13.5",
         "lodash": "^4.17.21",
