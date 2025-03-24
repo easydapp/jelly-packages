@@ -12,6 +12,8 @@ export class ComponentInfo {
     branches: AllBranches | undefined; // Referenced
     // The current component is an identity, and there are only one trigger in the future, so the trigger of this Identity is to which Trigger binding in the follow -up
     identity_triggers: Set<ComponentId> | undefined; // Requires any subsequent component to trigger to run
+    // this component is identity or call. and all branch component which triggered by this component
+    triggered_components: Set<ComponentId> | undefined;
     // The component of the trigger conditions of this component should be discharged,
     // 1. The front is identity. You need to trigger this call component to call the front IDentity. Therefore, when judging the display, you should not consider the output of Identity
     // 2. This component is a condition, and there is NULL judgment, so the dependence of this component should abandon the reference node of NULL

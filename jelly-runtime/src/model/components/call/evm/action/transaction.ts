@@ -134,6 +134,8 @@ export const call_evm_transaction_action = async (
     );
     if (unwrapped === undefined) return undefined;
 
+    console.debug(`🚀 ~ call: ~ unwrapped:`, actor, unwrapped);
+
     // 10. Estimated Gas Limit
     // ! Agent intercept execution, if necessary
     if (execute_evm_action_transaction_estimate_gas && identity_metadata.secret === undefined) {

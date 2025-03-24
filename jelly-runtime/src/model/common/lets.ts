@@ -2,7 +2,7 @@ import { LinkType } from '@jellypack/types/lib/types';
 
 import { LinkComponent } from '..';
 import { RuntimeValues } from '../../runtime/value';
-import { link_component_get_output_type } from '../components';
+import { link_component_get_id, link_component_get_output_type, match_link_component } from '../components';
 import { ComponentId } from './identity';
 import { key_refer_get_output_type, KeyRefer } from './refer';
 
@@ -98,6 +98,41 @@ export const all_endpoints_find_output_type = (self: AllEndpoints, endpoint: End
     if (!output) throw new Error('Endpoint not found');
     if (refer) return key_refer_get_output_type(refer, output);
     return output;
+};
+
+export const all_endpoints_find_all_trigger_interrupt_by_form = (
+    self: AllEndpoints,
+    triggers: Set<ComponentId>,
+    identity?: ComponentId,
+): Set<ComponentId> => {
+    const set = new Set<ComponentId>();
+    for (const e of self.endpoints) {
+        const s = all_endpoint_find_all_trigger_interrupt_by_form(e, triggers);
+        s.forEach((s) => set.add(s));
+    }
+    if (identity !== undefined && set.has(identity)) set.delete(identity);
+    return set;
+};
+
+export const all_endpoint_find_all_trigger_interrupt_by_form = (
+    self: AllEndpoint,
+    triggers: Set<ComponentId>,
+): Set<ComponentId> => {
+    const set = new Set<ComponentId>();
+    if ('form' in self.component) {
+        /** do nothing */
+    } else if ('interaction' in self.component) {
+        const id = link_component_get_id(self.component);
+        if (triggers.has(id)) set.add(id);
+    } else {
+        const id = link_component_get_id(self.component);
+        if (triggers.has(id)) set.add(id);
+        else if (self.inlets) {
+            const s = all_endpoints_find_all_trigger_interrupt_by_form(self.inlets, triggers);
+            s.forEach((s) => set.add(s));
+        }
+    }
+    return set;
 };
 
 // export const all_endpoints_has_component = (self: AllEndpoints, id: ComponentId): boolean => {

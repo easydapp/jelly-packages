@@ -10,8 +10,14 @@ import {
 import { deepClone } from '../common/clones';
 import { same } from '../common/same';
 import { LinkComponent } from '../model';
+import { match_component_call_trigger } from '../model/common/call_trigger';
 import { ComponentId } from '../model/common/identity';
-import { all_endpoints_has_output, AllBranches, AllEndpoints } from '../model/common/lets';
+import {
+    all_endpoints_find_all_trigger_interrupt_by_form,
+    all_endpoints_has_output,
+    AllBranches,
+    AllEndpoints,
+} from '../model/common/lets';
 import { InputValue, match_input_value, refer_value_get_value } from '../model/common/refer';
 import { match_validate_form_async } from '../model/common/validate';
 import {
@@ -42,6 +48,7 @@ import {
     component_identity_has_value,
     ComponentIdentity,
     ComponentIdentityValue,
+    match_identity_inner_metadata,
     PlainComponentIdentityValue,
 } from '../model/components/identity';
 import { ApiData, ApiDataAnchor } from '../store/api';
@@ -160,8 +167,38 @@ export class CombinedRuntime {
         }
         console.log('got all_endpoints', all_endpoints);
         const cached: Record<ComponentId, AllBranches> = {};
+        const triggers = new Set<ComponentId>();
         for (const id of this.combined_links) {
             const component = components[id];
+
+            // get all triggers
+            if (
+                match_link_component(component, {
+                    param: () => false,
+                    constant: () => false,
+                    form: () => false,
+                    code: () => false,
+                    identity: (identity) =>
+                        match_identity_inner_metadata(identity.metadata.metadata, {
+                            http: () => false,
+                            ic: (ic) => ic.connect !== undefined,
+                            evm: (evm) => evm.connect !== undefined,
+                        }),
+                    call: (call) =>
+                        match_component_call_trigger(component_call_get_trigger(call), {
+                            loading: () => false,
+                            clock: () => false,
+                            click: () => true,
+                        }),
+                    interaction: () => true,
+                    view: () => false,
+                    output: () => false,
+                    condition: () => false,
+                    combined: () => false,
+                })
+            ) {
+                triggers.add(id);
+            }
 
             if ('call' in component) {
                 const identity_id = component_call_get_identity(component.call);
@@ -184,7 +221,35 @@ export class CombinedRuntime {
             const branches = link_component_get_all_branches(id, combined.components, cached);
             this.components[id] = new ComponentInfo(id, component, endpoints, branches);
         }
+
+        // set triggered_components
+        for (const id of this.combined_links) {
+            const component = components[id];
+
+            if ('call' in component) {
+                const trigger = component_call_get_trigger(component.call);
+                if (!('loading' in trigger)) continue;
+
+                const identity_id = component_call_get_identity(component.call);
+                // find trigger
+                const endpoints = all_endpoints[id];
+                const ts = all_endpoints_find_all_trigger_interrupt_by_form(endpoints, triggers, identity_id);
+                let triggered_component: ComponentId | undefined = undefined;
+                if (ts.size === 1) {
+                    ts.forEach((id) => (triggered_component = id));
+                } else if (ts.size < 1 && identity_id !== undefined && triggers.has(identity_id)) {
+                    triggered_component = identity_id;
+                }
+                if (triggered_component !== undefined) {
+                    const info = this.components[triggered_component];
+                    const set = info.triggered_components ?? new Set();
+                    set.add(id);
+                    info.triggered_components = set;
+                }
+            }
+        }
         console.log('this.components', this.components);
+        // set excepted
         for (const current of this.combined_links) {
             const excepted = new Set<ComponentId>();
 
@@ -718,6 +783,10 @@ export class CombinedRuntime {
     public component(id: ComponentId): LinkComponent {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return this.combined.components.find((c) => link_component_get_id(c) === id)!;
+    }
+
+    public get_component_info(id: ComponentId): ComponentInfo {
+        return this.components[id];
     }
 
     public update_component(_id: ComponentId, _updated: number) {
