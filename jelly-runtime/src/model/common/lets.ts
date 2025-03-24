@@ -2,7 +2,7 @@ import { LinkType } from '@jellypack/types/lib/types';
 
 import { LinkComponent } from '..';
 import { RuntimeValues } from '../../runtime/value';
-import { link_component_get_id, link_component_get_output_type, match_link_component } from '../components';
+import { link_component_get_id, link_component_get_output_type } from '../components';
 import { ComponentId } from './identity';
 import { key_refer_get_output_type, KeyRefer } from './refer';
 
