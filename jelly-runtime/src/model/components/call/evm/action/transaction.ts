@@ -153,7 +153,7 @@ export const call_evm_transaction_action = async (
             unwrapped,
         });
     } else {
-        await estimate_gas(gas_limit, actor, item, unwrapped);
+        await estimate_gas(gas_limit, actor, item, unwrapped, pay_value);
     }
 
     // 11. Request
@@ -245,11 +245,12 @@ export const estimate_gas = async (
     actor: ethers.Contract,
     item: AbiItem,
     unwrapped: any[],
+    pay_value: string | undefined,
 ) => {
     let estimate_gas_limit: bigint | undefined = undefined;
     if (gas_limit !== undefined) {
         try {
-            estimate_gas_limit = await actor[item.name ?? ''].estimateGas(...unwrapped);
+            estimate_gas_limit = await actor[item.name ?? ''].estimateGas(...unwrapped, { value: pay_value });
         } catch (e) {
             console.error(`🚀 ~ call evm failed:`, e);
             if (handle_evm_wallet_error(e)) return undefined;
